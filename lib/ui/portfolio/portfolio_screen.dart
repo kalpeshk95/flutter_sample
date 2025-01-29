@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RemoteScreen extends StatelessWidget {
-  const RemoteScreen({super.key});
+class PortfolioScreen extends StatelessWidget {
+  const PortfolioScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

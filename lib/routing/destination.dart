@@ -8,7 +8,9 @@ class Destination {
 }
 
 const destinations = [
-  Destination(label: 'Remote', icon: Icons.network_wifi),
-  Destination(label: 'DB', icon: Icons.dataset),
-  Destination(label: 'Profile', icon: Icons.person),
+  Destination(label: 'Watchlist', icon: Icons.checklist),
+  Destination(label: 'Orders', icon: Icons.receipt_long),
+  Destination(label: 'Portfolio', icon: Icons.analytics),
+  Destination(label: 'Funds', icon: Icons.account_balance_wallet),
+  Destination(label: 'User', icon: Icons.account_circle),
 ];

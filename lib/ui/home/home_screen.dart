@@ -40,13 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
     final currentLocation =
         GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
 
-    if (currentLocation == Routes.remotePage) {
+    if (currentLocation == Routes.portfolioPage) {
       return true; // Allow the pop to proceed
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
           GoRouter.of(context)
-              .go(Routes.remotePage); // Navigate to the default route
+              .go(Routes.portfolioPage); // Navigate to the default route
         }
       });
       return false; // Prevent immediate pop

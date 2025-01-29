@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DatabaseScreen extends StatelessWidget {
-  const DatabaseScreen({super.key});
+class EmptyScreen extends StatelessWidget {
+  const EmptyScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
