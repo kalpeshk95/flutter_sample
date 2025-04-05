@@ -1,5 +1,7 @@
-import 'package:flutter_sample/data/remote/network_exception.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'network_exception.dart';
 
 part 'network_response.freezed.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../routing/destination.dart';
-import '../../routing/routes.dart';
+import '../../../routing/destination.dart';
+import '../../../routing/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.navigationShell});

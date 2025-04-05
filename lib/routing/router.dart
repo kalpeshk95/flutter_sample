@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sample/routing/routes.dart';
-import 'package:flutter_sample/ui/empty/empty_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../di/locator.dart';
-import '../ui/home/home_screen.dart';
-import '../ui/portfolio/PortfolioVm.dart';
-import '../ui/portfolio/portfolio_screen.dart';
-import '../ui/setting/setting_screen.dart';
+import '../core/di/locator.dart';
+import '../ui/screens/empty/empty_screen.dart';
+import '../ui/screens/home/home_screen.dart';
+import '../ui/screens/portfolio/portfolio_vm.dart';
+import '../ui/screens/portfolio/portfolio_screen.dart';
+import '../ui/screens/setting/setting_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 

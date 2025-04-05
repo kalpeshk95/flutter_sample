@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/ui/utility/extentions.dart';
+import 'package:flutter_sample/ui/shared/utility/extension.dart';
 
-import '../widgets/profit_loss_check.dart';
+import '../../shared/widgets/profit_loss_check.dart';
+
 
 class PortfolioSummary extends StatefulWidget {
   final double currValue;

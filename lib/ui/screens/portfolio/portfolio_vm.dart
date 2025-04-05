@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../repo/portfolio_repo.dart';
-import '../utility/ui_state.dart';
+import '../../../repo/portfolio_repo.dart';
+import '../../shared/utility/ui_state.dart';
 import 'holding_data.dart';
 
 class PortfolioVm extends ChangeNotifier {

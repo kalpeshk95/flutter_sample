@@ -1,4 +1,4 @@
-import '../../data/remote/model/holding/holding_response.dart';
+import '../../../core/remote/model/holding/holding_response.dart';
 
 class HoldingData {
   final String symbol;

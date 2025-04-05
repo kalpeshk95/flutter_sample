@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/ui/portfolio/PortfolioVm.dart';
-import 'package:flutter_sample/ui/portfolio/holding_data.dart';
-import 'package:flutter_sample/ui/portfolio/portfolio_summary.dart';
-import 'package:flutter_sample/ui/utility/extentions.dart';
-import 'package:flutter_sample/ui/widgets/profit_loss_check.dart';
+import 'package:flutter_sample/ui/screens/portfolio/portfolio_summary.dart';
+import 'package:flutter_sample/ui/shared/utility/extension.dart';
 import 'package:provider/provider.dart';
 
-import '../utility/ui_state.dart';
+import '../../shared/utility/ui_state.dart';
+import '../../shared/widgets/profit_loss_check.dart';
+import 'holding_data.dart';
+import 'portfolio_vm.dart';
 
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({super.key});

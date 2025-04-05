@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/routing/router.dart';
 
-import 'di/locator.dart';
+import 'core/di/locator.dart';
 
 void main() {
   setupLocator();
