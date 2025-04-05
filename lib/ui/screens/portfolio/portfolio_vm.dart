@@ -19,9 +19,8 @@ class PortfolioVm extends ChangeNotifier {
         holdingsState = UiState.success(toHoldingData(data.data!.userHolding!));
       },
       failure: (e) {
-        holdingsState = UiState.error(e.toString());
+        holdingsState = UiState.error(e);
       },
-      loading: (_) {}, // optional
     );
     notifyListeners();
   }

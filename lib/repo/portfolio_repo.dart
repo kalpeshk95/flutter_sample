@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import '../core/remote/api_service.dart';
+import '../core/remote/error_handler.dart';
 import '../core/remote/model/holding/holding_response.dart';
-import '../core/remote/network_exception.dart';
 import '../core/remote/network_response.dart';
 
 abstract interface class PortfolioRepo {
@@ -20,7 +20,8 @@ class PortfolioRepoImpl extends PortfolioRepo {
       final HoldingResponse holding = holdingResponseFromJson(jsonEncode(response.data));
       return NetworkResponse.success(data: holding);
     } catch (e) {
-      return NetworkResponse.error(NetworkExceptions.getDioException(e));
+      final errorMessage = ErrorHandler.getErrorMessage(e);
+      return NetworkResponse.error(errorMessage);
     }
   }
 }

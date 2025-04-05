@@ -1,6 +1,6 @@
 import '../core/remote/api_service.dart';
+import '../core/remote/error_handler.dart';
 import '../core/remote/model/user/user_details.dart';
-import '../core/remote/network_exception.dart';
 import '../core/remote/network_response.dart';
 
 abstract interface class UserRepo {
@@ -18,7 +18,8 @@ class UserRepoImpl extends UserRepo {
       final List<UserDetails> users = userDetailsFromJson(response.data);
       return NetworkResponse.success(data: users);
     } catch (e) {
-      return NetworkResponse.error(NetworkExceptions.getDioException(e));
+      final errorMessage = ErrorHandler.getErrorMessage(e);
+      return NetworkResponse.error(errorMessage);
     }
   }
 }

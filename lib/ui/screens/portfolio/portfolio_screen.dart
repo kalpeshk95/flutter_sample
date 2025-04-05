@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_summary.dart';
 import 'package:flutter_sample/ui/shared/utility/extension.dart';
+import 'package:flutter_sample/ui/shared/widgets/error_screen.dart';
+import 'package:flutter_sample/ui/shared/widgets/ui_state_builder.dart';
 import 'package:provider/provider.dart';
 
-import '../../shared/utility/ui_state.dart';
 import '../../shared/widgets/profit_loss_check.dart';
 import 'holding_data.dart';
 import 'portfolio_vm.dart';
@@ -16,42 +17,38 @@ class PortfolioScreen extends StatelessWidget {
     return Scaffold(
       body: Consumer<PortfolioVm>(
         builder: (context, controller, _) {
-          final state = context.watch<PortfolioVm>().holdingsState;
-
-          if (state.status == Status.loading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state.status == Status.error) {
-            return Center(child: Text('Error: ${state.error}'));
-          } else if (state.data == null || state.data!.isEmpty) {
-            return const Center(child: Text('No Holdings Available'));
-          }
-
-          final holdings = state.data!;
-          final double currValue =
-              holdings.fold(0, (sum, item) => sum + (item.ltp * item.quantity));
-          final double currInvest =
-              holdings.fold(0, (sum, item) => sum + (item.avgPrice * item.quantity));
-          final double todayPnL = holdings.fold(0, (sum, item) => sum + item.pnl);
-          final double totalPnL = currValue - currInvest;
-
-          return Column(
-            children: [
-              Expanded(
-                child: ListView.separated(
-                  itemCount: holdings.length,
-                  itemBuilder: (context, index) => HoldingTile(
-                    holding: holdings[index],
+          final vm = context.watch<PortfolioVm>();
+          return UiStateBuilder<List<HoldingData>>(
+            uiState: vm.holdingsState,
+            onSuccess: (data) {
+              final holdings = vm.holdingsState.data!;
+              final double currValue =
+                  holdings.fold(0, (sum, item) => sum + (item.ltp * item.quantity));
+              final double currInvest =
+                  holdings.fold(0, (sum, item) => sum + (item.avgPrice * item.quantity));
+              final double todayPnL = holdings.fold(0, (sum, item) => sum + item.pnl);
+              final double totalPnL = currValue - currInvest;
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: holdings.length,
+                      itemBuilder: (context, index) => HoldingTile(
+                        holding: holdings[index],
+                      ),
+                      separatorBuilder: (_, __) => const Divider(),
+                    ),
                   ),
-                  separatorBuilder: (_, __) => const Divider(),
-                ),
-              ),
-              PortfolioSummary(
-                currValue: currValue,
-                currInvest: currInvest,
-                todayPnL: todayPnL,
-                totalPnL: totalPnL,
-              ),
-            ],
+                  PortfolioSummary(
+                    currValue: currValue,
+                    currInvest: currInvest,
+                    todayPnL: todayPnL,
+                    totalPnL: totalPnL,
+                  ),
+                ],
+              );
+            },
+            errorWidget: ErrorScreen(errorMessage: vm.holdingsState.error),
           );
         },
       ),

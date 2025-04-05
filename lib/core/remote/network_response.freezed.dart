@@ -19,22 +19,19 @@ mixin _$NetworkResponse<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(NetworkExceptions error) failure,
-    required TResult Function(String message) loading,
+    required TResult Function(String error) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? success,
-    TResult? Function(NetworkExceptions error)? failure,
-    TResult? Function(String message)? loading,
+    TResult? Function(String error)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(NetworkExceptions error)? failure,
-    TResult Function(String message)? loading,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +39,18 @@ mixin _$NetworkResponse<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(SUCCESS<T> value) success,
     required TResult Function(FAILURE<T> value) failure,
-    required TResult Function(LOADING<T> value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SUCCESS<T> value)? success,
     TResult? Function(FAILURE<T> value)? failure,
-    TResult? Function(LOADING<T> value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SUCCESS<T> value)? success,
     TResult Function(FAILURE<T> value)? failure,
-    TResult Function(LOADING<T> value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,8 +147,7 @@ class _$SUCCESSImpl<T> implements SUCCESS<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(NetworkExceptions error) failure,
-    required TResult Function(String message) loading,
+    required TResult Function(String error) failure,
   }) {
     return success(data);
   }
@@ -163,8 +156,7 @@ class _$SUCCESSImpl<T> implements SUCCESS<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? success,
-    TResult? Function(NetworkExceptions error)? failure,
-    TResult? Function(String message)? loading,
+    TResult? Function(String error)? failure,
   }) {
     return success?.call(data);
   }
@@ -173,8 +165,7 @@ class _$SUCCESSImpl<T> implements SUCCESS<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(NetworkExceptions error)? failure,
-    TResult Function(String message)? loading,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -188,7 +179,6 @@ class _$SUCCESSImpl<T> implements SUCCESS<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(SUCCESS<T> value) success,
     required TResult Function(FAILURE<T> value) failure,
-    required TResult Function(LOADING<T> value) loading,
   }) {
     return success(this);
   }
@@ -198,7 +188,6 @@ class _$SUCCESSImpl<T> implements SUCCESS<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SUCCESS<T> value)? success,
     TResult? Function(FAILURE<T> value)? failure,
-    TResult? Function(LOADING<T> value)? loading,
   }) {
     return success?.call(this);
   }
@@ -208,7 +197,6 @@ class _$SUCCESSImpl<T> implements SUCCESS<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SUCCESS<T> value)? success,
     TResult Function(FAILURE<T> value)? failure,
-    TResult Function(LOADING<T> value)? loading,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -236,9 +224,7 @@ abstract class _$$FAILUREImplCopyWith<T, $Res> {
           _$FAILUREImpl<T> value, $Res Function(_$FAILUREImpl<T>) then) =
       __$$FAILUREImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({NetworkExceptions error});
-
-  $NetworkExceptionsCopyWith<$Res> get error;
+  $Res call({String error});
 }
 
 /// @nodoc
@@ -257,31 +243,21 @@ class __$$FAILUREImplCopyWithImpl<T, $Res>
     Object? error = null,
   }) {
     return _then(_$FAILUREImpl<T>(
-      error: null == error
+      null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as NetworkExceptions,
+              as String,
     ));
-  }
-
-  /// Create a copy of NetworkResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $NetworkExceptionsCopyWith<$Res> get error {
-    return $NetworkExceptionsCopyWith<$Res>(_value.error, (value) {
-      return _then(_value.copyWith(error: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$FAILUREImpl<T> implements FAILURE<T> {
-  const _$FAILUREImpl({required this.error});
+  const _$FAILUREImpl(this.error);
 
   @override
-  final NetworkExceptions error;
+  final String error;
 
   @override
   String toString() {
@@ -311,8 +287,7 @@ class _$FAILUREImpl<T> implements FAILURE<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(NetworkExceptions error) failure,
-    required TResult Function(String message) loading,
+    required TResult Function(String error) failure,
   }) {
     return failure(error);
   }
@@ -321,8 +296,7 @@ class _$FAILUREImpl<T> implements FAILURE<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? success,
-    TResult? Function(NetworkExceptions error)? failure,
-    TResult? Function(String message)? loading,
+    TResult? Function(String error)? failure,
   }) {
     return failure?.call(error);
   }
@@ -331,8 +305,7 @@ class _$FAILUREImpl<T> implements FAILURE<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(NetworkExceptions error)? failure,
-    TResult Function(String message)? loading,
+    TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -346,7 +319,6 @@ class _$FAILUREImpl<T> implements FAILURE<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(SUCCESS<T> value) success,
     required TResult Function(FAILURE<T> value) failure,
-    required TResult Function(LOADING<T> value) loading,
   }) {
     return failure(this);
   }
@@ -356,7 +328,6 @@ class _$FAILUREImpl<T> implements FAILURE<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SUCCESS<T> value)? success,
     TResult? Function(FAILURE<T> value)? failure,
-    TResult? Function(LOADING<T> value)? loading,
   }) {
     return failure?.call(this);
   }
@@ -366,7 +337,6 @@ class _$FAILUREImpl<T> implements FAILURE<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SUCCESS<T> value)? success,
     TResult Function(FAILURE<T> value)? failure,
-    TResult Function(LOADING<T> value)? loading,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -377,160 +347,13 @@ class _$FAILUREImpl<T> implements FAILURE<T> {
 }
 
 abstract class FAILURE<T> implements NetworkResponse<T> {
-  const factory FAILURE({required final NetworkExceptions error}) =
-      _$FAILUREImpl<T>;
+  const factory FAILURE(final String error) = _$FAILUREImpl<T>;
 
-  NetworkExceptions get error;
+  String get error;
 
   /// Create a copy of NetworkResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FAILUREImplCopyWith<T, _$FAILUREImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LOADINGImplCopyWith<T, $Res> {
-  factory _$$LOADINGImplCopyWith(
-          _$LOADINGImpl<T> value, $Res Function(_$LOADINGImpl<T>) then) =
-      __$$LOADINGImplCopyWithImpl<T, $Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$LOADINGImplCopyWithImpl<T, $Res>
-    extends _$NetworkResponseCopyWithImpl<T, $Res, _$LOADINGImpl<T>>
-    implements _$$LOADINGImplCopyWith<T, $Res> {
-  __$$LOADINGImplCopyWithImpl(
-      _$LOADINGImpl<T> _value, $Res Function(_$LOADINGImpl<T>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of NetworkResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$LOADINGImpl<T>(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LOADINGImpl<T> implements LOADING<T> {
-  const _$LOADINGImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'NetworkResponse<$T>.loading(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LOADINGImpl<T> &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of NetworkResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LOADINGImplCopyWith<T, _$LOADINGImpl<T>> get copyWith =>
-      __$$LOADINGImplCopyWithImpl<T, _$LOADINGImpl<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(T data) success,
-    required TResult Function(NetworkExceptions error) failure,
-    required TResult Function(String message) loading,
-  }) {
-    return loading(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T data)? success,
-    TResult? Function(NetworkExceptions error)? failure,
-    TResult? Function(String message)? loading,
-  }) {
-    return loading?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T data)? success,
-    TResult Function(NetworkExceptions error)? failure,
-    TResult Function(String message)? loading,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SUCCESS<T> value) success,
-    required TResult Function(FAILURE<T> value) failure,
-    required TResult Function(LOADING<T> value) loading,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SUCCESS<T> value)? success,
-    TResult? Function(FAILURE<T> value)? failure,
-    TResult? Function(LOADING<T> value)? loading,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SUCCESS<T> value)? success,
-    TResult Function(FAILURE<T> value)? failure,
-    TResult Function(LOADING<T> value)? loading,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LOADING<T> implements NetworkResponse<T> {
-  const factory LOADING(final String message) = _$LOADINGImpl<T>;
-
-  String get message;
-
-  /// Create a copy of NetworkResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LOADINGImplCopyWith<T, _$LOADINGImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
