@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
-  static final ApiService _instance = ApiService._internal();
-  late final String baseUrl;
+  static ApiService? _instance; // Nullable instance
+  final String baseUrl;
   static const Duration timeout = Duration(milliseconds: 1000 * 300);
   final Dio _dio = Dio(BaseOptions(
     receiveTimeout: timeout,
@@ -10,12 +10,12 @@ class ApiService {
     sendTimeout: timeout,
   ));
 
+  // Factory constructor to initialize or return existing instance
   factory ApiService({required String baseUrl}) {
-    _instance.baseUrl = baseUrl;
-    return _instance;
+    return _instance ??= ApiService._internal(baseUrl);
   }
 
-  ApiService._internal() {
+  ApiService._internal(this.baseUrl) {
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       options.baseUrl = baseUrl;
       return handler.next(options);

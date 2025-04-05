@@ -19,8 +19,7 @@ class UserRepoImpl extends UserRepo {
       final List<UserDetails> users = userDetailsFromJson(response.data);
       return NetworkResponse.success(data: users);
     } catch (e) {
-      return NetworkResponse.error(
-          NetworkExceptions.getDioException(e).toString());
+      return NetworkResponse.error(NetworkExceptions.getDioException(e));
     }
   }
 }
