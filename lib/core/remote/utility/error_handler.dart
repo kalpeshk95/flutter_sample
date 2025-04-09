@@ -5,11 +5,9 @@ import 'package:dio/dio.dart';
 
 class ErrorHandler {
   static String getErrorMessage(dynamic error) {
-    if (error is SocketException) {
-      return 'No internet connection';
-    } else if (error is TimeoutException) {
-      return 'Request timed out';
-    } else if (error is DioException) {
+    if (error is SocketException) return 'No internet connection';
+    if (error is TimeoutException) return 'Request timed out';
+    if (error is DioException) {
       switch (error.type) {
         case DioExceptionType.cancel:
           return 'Request was cancelled';
@@ -18,12 +16,11 @@ class ErrorHandler {
         case DioExceptionType.receiveTimeout:
           return 'Receive timeout';
         case DioExceptionType.badResponse:
-          return 'Received invalid status code: ${error.response?.statusCode}';
+          return 'Invalid status code: ${error.response?.statusCode}';
         default:
           return 'Unexpected error occurred';
       }
-    } else {
-      return 'An unknown error occurred';
     }
+    return 'An unknown error occurred';
   }
 }
