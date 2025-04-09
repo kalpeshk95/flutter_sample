@@ -1,5 +1,10 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+extension ThemeContextExtension on BuildContext {
+  bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+}
 
 extension CurrencyFormatter on double {
   String formatCurrency() {

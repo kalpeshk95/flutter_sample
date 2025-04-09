@@ -3,7 +3,6 @@ import 'package:flutter_sample/ui/shared/utility/extension.dart';
 
 import '../../shared/widgets/profit_loss_check.dart';
 
-
 class PortfolioSummary extends StatefulWidget {
   final double currValue;
   final double currInvest;
@@ -27,15 +26,24 @@ class _PortfolioSummaryState extends State<PortfolioSummary> {
 
   @override
   Widget build(BuildContext context) {
+
+    final colorScheme = Theme.of(context).colorScheme;
+    final backgroundColor = context.isDarkMode
+        ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.8)
+        : colorScheme.surfaceContainerHighest.withValues(alpha: 1);
+    final borderColor = context.isDarkMode
+        ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.5)
+        : Colors.grey.shade300;
+
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: backgroundColor,
         border: Border(
-          left: BorderSide(color: Colors.grey),
-          right: BorderSide(color: Colors.grey),
-          top: BorderSide(color: Colors.grey),
+          left: BorderSide(color: borderColor),
+          right: BorderSide(color: borderColor),
+          top: BorderSide(color: borderColor),
         ),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(8),
           topRight: Radius.circular(8),
         ),
