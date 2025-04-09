@@ -1,7 +1,7 @@
 import '../core/remote/api_service.dart';
-import '../core/remote/error_handler.dart';
 import '../core/remote/model/user/user_details.dart';
-import '../core/remote/network_response.dart';
+import '../core/remote/utility/error_handler.dart';
+import '../core/remote/utility/network_response.dart';
 
 abstract interface class UserRepo {
   Future<NetworkResponse<List<UserDetails>>> getUsers();

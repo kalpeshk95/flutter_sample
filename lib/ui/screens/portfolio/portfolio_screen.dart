@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_summary.dart';
 import 'package:flutter_sample/ui/shared/utility/extension.dart';
-import 'package:flutter_sample/ui/shared/widgets/error_screen.dart';
 import 'package:flutter_sample/ui/shared/widgets/ui_state_builder.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +47,7 @@ class PortfolioScreen extends StatelessWidget {
                 ],
               );
             },
-            errorWidget: ErrorScreen(errorMessage: vm.holdingsState.error),
+            onRetry: vm.fetchHoldings,
           );
         },
       ),

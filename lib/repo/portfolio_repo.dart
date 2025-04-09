@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import '../core/remote/api_service.dart';
-import '../core/remote/error_handler.dart';
 import '../core/remote/model/holding/holding_response.dart';
-import '../core/remote/network_response.dart';
+import '../core/remote/utility/error_handler.dart';
+import '../core/remote/utility/network_response.dart';
 
 abstract interface class PortfolioRepo {
   Future<NetworkResponse<HoldingResponse>> getHoldings();
