@@ -22,11 +22,10 @@ class PortfolioSummary extends StatefulWidget {
 }
 
 class _PortfolioSummaryState extends State<PortfolioSummary> {
-  bool showDetails = true;
+  bool showDetails = false;
 
   @override
   Widget build(BuildContext context) {
-
     final colorScheme = Theme.of(context).colorScheme;
     final backgroundColor = context.isDarkMode
         ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.8)

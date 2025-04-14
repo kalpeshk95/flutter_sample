@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
             preferredSize: const Size.fromHeight(48),
             child: Container(
               color: Colors.deepPurple,
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               child: Row(
                 spacing: 10,
                 children: [
@@ -37,16 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  const Spacer(),
-                  Transform.rotate(
-                    angle: 90 * (3.141592653589793 / 180),
-                    child: const Icon(
-                      Icons.compare_arrows,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const VerticalDivider(thickness: 1, color: Colors.grey),
-                  const Icon(Icons.search, color: Colors.white),
                 ],
               ),
             ),

@@ -7,7 +7,8 @@ import '../../ui/screens/portfolio/portfolio_vm.dart';
 final locator = GetIt.instance;
 
 void setupLocator() {
-  locator.registerLazySingleton(() => PortfolioVm());
   locator.registerLazySingleton<PortfolioRepoImpl>(() => PortfolioRepoImpl());
+  locator.registerFactory<PortfolioVm>(() => PortfolioVm(locator<PortfolioRepoImpl>()));
+
   locator.registerLazySingleton<UserRepoImpl>(() => UserRepoImpl());
 }
