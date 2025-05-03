@@ -40,24 +40,27 @@ class PortfolioScreen extends StatelessWidget {
         builder: (_, vm, __) {
           return UiStateBuilder<List<HoldingData>>(
             uiState: vm.holdingsState,
-            onSuccess: (_) => Column(
-              children: [
-                SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
-                const Divider(height: 1),
-                Expanded(
-                  child: ListView.separated(
-                    itemCount: vm.sortedFilteredHoldings.length,
-                    itemBuilder: (_, i) => HoldingTile(holding: vm.sortedFilteredHoldings[i]),
-                    separatorBuilder: (_, __) => const Divider(),
+            onSuccess: (_) => RefreshIndicator(
+              onRefresh: () => vm.fetchHoldings(),
+              child: Column(
+                children: [
+                  SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
+                  const Divider(height: 1),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: vm.sortedFilteredHoldings.length,
+                      itemBuilder: (_, i) => HoldingTile(holding: vm.sortedFilteredHoldings[i]),
+                      separatorBuilder: (_, __) => const Divider(),
+                    ),
                   ),
-                ),
-                PortfolioSummary(
-                  currValue: vm.currValue,
-                  currInvest: vm.currInvest,
-                  todayPnL: vm.todayPnL,
-                  totalPnL: vm.totalPnL,
-                ),
-              ],
+                  PortfolioSummary(
+                    currValue: vm.currValue,
+                    currInvest: vm.currInvest,
+                    todayPnL: vm.todayPnL,
+                    totalPnL: vm.totalPnL,
+                  ),
+                ],
+              ),
             ),
             onRetry: vm.fetchHoldings,
             showRetryOnEmpty: true,
