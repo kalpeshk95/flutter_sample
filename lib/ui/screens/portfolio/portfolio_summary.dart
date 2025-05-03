@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/shared/utility/extension.dart';
+import 'package:provider/provider.dart';
 
 import '../../shared/widgets/profit_loss_check.dart';
+import 'portfolio_vm.dart';
 
-class PortfolioSummary extends StatefulWidget {
+class PortfolioSummary extends StatelessWidget {
   final double currValue;
   final double currInvest;
   final double todayPnL;
@@ -18,15 +20,10 @@ class PortfolioSummary extends StatefulWidget {
   });
 
   @override
-  State<PortfolioSummary> createState() => _PortfolioSummaryState();
-}
-
-class _PortfolioSummaryState extends State<PortfolioSummary> {
-  bool showDetails = false;
-
-  @override
   Widget build(BuildContext context) {
+    final isExpanded = context.select<PortfolioVm, bool>((vm) => vm.isExpanded);
     final colorScheme = Theme.of(context).colorScheme;
+
     final backgroundColor = context.isDarkMode
         ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.8)
         : colorScheme.surfaceContainerHighest.withValues(alpha: 1);
@@ -53,35 +50,31 @@ class _PortfolioSummaryState extends State<PortfolioSummary> {
           AnimatedCrossFade(
             firstChild: Column(
               children: [
+                SummaryRow(title: "Current Value", value: "\u{20B9} ${currValue.formatCurrency()}"),
                 SummaryRow(
-                    title: "Current Value", value: "\u{20B9} ${widget.currValue.formatCurrency()}"),
-                SummaryRow(
-                    title: "Total Investment",
-                    value: "\u{20B9} ${widget.currInvest.formatCurrency()}"),
+                    title: "Total Investment", value: "\u{20B9} ${currInvest.formatCurrency()}"),
                 SummaryRow(
                   title: "Today's Profit & Loss",
                   valueWidget: ProfitLossCheck(
-                      value: widget.todayPnL,
-                      highLightedText: "\u{20B9} ${widget.todayPnL.formatCurrency()}"),
+                      value: todayPnL, highLightedText: "\u{20B9} ${todayPnL.formatCurrency()}"),
                 ),
                 const Divider(),
               ],
             ),
             secondChild: const SizedBox.shrink(),
-            crossFadeState: showDetails ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            crossFadeState: isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
             duration: const Duration(milliseconds: 300),
           ),
           InkWell(
-            onTap: () => setState(() => showDetails = !showDetails),
+            onTap: () => context.read<PortfolioVm>().toggleExpansion(),
             child: SummaryRow(
               title: "Profit & Loss",
               titleWidget: Row(children: [
                 const Text("Profit & Loss", style: TextStyle(fontSize: 14)),
-                Icon(showDetails ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down),
+                Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down),
               ]),
               valueWidget: ProfitLossCheck(
-                  value: widget.totalPnL,
-                  highLightedText: "\u{20B9} ${widget.totalPnL.formatCurrency()}"),
+                  value: totalPnL, highLightedText: "\u{20B9} ${totalPnL.formatCurrency()}"),
             ),
           ),
         ],

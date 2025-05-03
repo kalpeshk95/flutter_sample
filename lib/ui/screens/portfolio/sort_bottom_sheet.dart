@@ -4,6 +4,21 @@ enum SortDirection { none, ascending, descending }
 
 enum SortBy { name, qty, ltp, pnl }
 
+extension SortByLabel on SortBy {
+  String get label {
+    switch (this) {
+      case SortBy.name:
+        return 'Name';
+      case SortBy.qty:
+        return 'Quantity';
+      case SortBy.ltp:
+        return 'LTP';
+      case SortBy.pnl:
+        return 'P&L';
+    }
+  }
+}
+
 class SortBottomSheet extends StatefulWidget {
   final SortBy? selectedSort;
   final SortDirection direction;
@@ -60,9 +75,9 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
   IconData _getSortIcon(SortDirection direction) {
     switch (direction) {
       case SortDirection.ascending:
-        return Icons.arrow_upward;
+        return Icons.arrow_downward_rounded;
       case SortDirection.descending:
-        return Icons.arrow_downward;
+        return Icons.arrow_upward_rounded;
       case SortDirection.none:
         return Icons.swap_vert;
     }
@@ -102,7 +117,7 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
                   label: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(sort.name.toUpperCase()),
+                      Text(sort.label),
                       if (isSelected && currentDirection != SortDirection.none)
                         Padding(
                           padding: const EdgeInsets.only(left: 4),

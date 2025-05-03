@@ -24,11 +24,9 @@ class PortfolioScreen extends StatelessWidget {
       builder: (_) => SortBottomSheet(
         selectedSort: vm.selectedSort,
         direction: vm.sortDirection,
-        onSelected: (sort, direction) {
-          vm.updateSort(sort, direction);
-        },
+        onSelected: vm.updateSort,
         onClear: () {
-          vm.updateSort(SortBy.name, SortDirection.none);
+          vm.updateSort(SortBy.name, SortDirection.ascending);
           Navigator.pop(context);
         },
       ),
@@ -39,40 +37,30 @@ class PortfolioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<PortfolioVm>(
-        builder: (context, vm, _) {
+        builder: (_, vm, __) {
           return UiStateBuilder<List<HoldingData>>(
             uiState: vm.holdingsState,
-            onSuccess: (_) {
-              final holdings = vm.sortedFilteredHoldings; // For list
-              final summary = vm.allHoldings; // For summary only
-              final double currValue =
-                  summary.fold(0, (sum, item) => sum + (item.ltp * item.quantity));
-              final double currInvest =
-                  summary.fold(0, (sum, item) => sum + (item.avgPrice * item.quantity));
-              final double todayPnL = summary.fold(0, (sum, item) => sum + item.pnl);
-              final double totalPnL = currValue - currInvest;
-
-              return Column(
-                children: [
-                  SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
-                  const Divider(height: 1),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: holdings.length,
-                      itemBuilder: (_, i) => HoldingTile(holding: holdings[i]),
-                      separatorBuilder: (_, __) => const Divider(),
-                    ),
+            onSuccess: (_) => Column(
+              children: [
+                SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
+                const Divider(height: 1),
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: vm.sortedFilteredHoldings.length,
+                    itemBuilder: (_, i) => HoldingTile(holding: vm.sortedFilteredHoldings[i]),
+                    separatorBuilder: (_, __) => const Divider(),
                   ),
-                  PortfolioSummary(
-                    currValue: currValue,
-                    currInvest: currInvest,
-                    todayPnL: todayPnL,
-                    totalPnL: totalPnL,
-                  ),
-                ],
-              );
-            },
+                ),
+                PortfolioSummary(
+                  currValue: vm.currValue,
+                  currInvest: vm.currInvest,
+                  todayPnL: vm.todayPnL,
+                  totalPnL: vm.totalPnL,
+                ),
+              ],
+            ),
             onRetry: vm.fetchHoldings,
+            showRetryOnEmpty: true,
           );
         },
       ),

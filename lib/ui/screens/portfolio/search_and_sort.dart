@@ -2,43 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_vm.dart';
 import 'package:provider/provider.dart';
 
-class SearchAndSort extends StatefulWidget {
+class SearchAndSort extends StatelessWidget {
   final VoidCallback onFilterTap;
 
   const SearchAndSort({super.key, required this.onFilterTap});
 
   @override
-  State<SearchAndSort> createState() => _SearchAndSortState();
-}
-
-class _SearchAndSortState extends State<SearchAndSort> {
-  late TextEditingController textController;
-
-  @override
-  void initState() {
-    super.initState();
-    final vm = context.read<PortfolioVm>();
-    textController = TextEditingController(text: vm.searchText);
-    textController.addListener(() => vm.updateSearch(textController.text));
-  }
-
-  @override
-  void dispose() {
-    textController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final vm = context.watch<PortfolioVm>();
+    final isSearching = context.select<PortfolioVm, bool>((vm) => vm.isSearching);
+    final searchText = context.select<PortfolioVm, String>((vm) => vm.searchText);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
-          if (vm.isSearching) ...[
+          if (isSearching) ...[
             Expanded(
               child: TextField(
-                controller: textController,
+                controller: TextEditingController(text: searchText)
+                  ..selection = TextSelection.collapsed(offset: searchText.length),
+                onChanged: context.read<PortfolioVm>().updateSearch,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
                   filled: true,
@@ -52,16 +35,18 @@ class _SearchAndSortState extends State<SearchAndSort> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.clear),
+              icon: const Icon(Icons.clear_rounded),
               onPressed: () {
-                textController.clear();
-                vm.toggleSearch();
+                context.read<PortfolioVm>().toggleSearch();
               },
             )
           ] else ...[
-            IconButton(icon: const Icon(Icons.sort_rounded), onPressed: widget.onFilterTap),
+            IconButton(icon: const Icon(Icons.swap_vert_rounded), onPressed: onFilterTap),
             const Spacer(),
-            IconButton(icon: const Icon(Icons.search), onPressed: vm.toggleSearch),
+            IconButton(
+              icon: const Icon(Icons.search_rounded),
+              onPressed: () => context.read<PortfolioVm>().toggleSearch(),
+            ),
           ]
         ],
       ),
