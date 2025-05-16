@@ -8,6 +8,8 @@ class UiStateBuilder<T> extends StatelessWidget {
   final VoidCallback? onRetry;
   final Widget? loadingWidget;
   final Widget Function(String error)? errorBuilder;
+  final String emptyMessage;
+  final bool showRetryOnEmpty;
 
   const UiStateBuilder({
     super.key,
@@ -16,6 +18,8 @@ class UiStateBuilder<T> extends StatelessWidget {
     this.onRetry,
     this.loadingWidget,
     this.errorBuilder,
+    this.emptyMessage = "No data available",
+    this.showRetryOnEmpty = false,
   });
 
   @override
@@ -29,10 +33,18 @@ class UiStateBuilder<T> extends StatelessWidget {
             _DefaultErrorView(message: errorMessage, onRetry: onRetry);
       case Status.success:
         final data = uiState.data;
-        if (data != null) {
+        if (data is Iterable && data.isEmpty) {
+          return _DefaultErrorView(
+            message: emptyMessage,
+            onRetry: showRetryOnEmpty ? onRetry : null,
+          );
+        } else if (data != null) {
           return onSuccess(data);
         } else {
-          return const Center(child: Text("No data available"));
+          return _DefaultErrorView(
+            message: emptyMessage,
+            onRetry: showRetryOnEmpty ? onRetry : null,
+          );
         }
     }
   }
@@ -53,7 +65,8 @@ class _DefaultErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icon = message.toLowerCase().contains('internet') ? Icons.wifi_off : Icons.warning;
+    final icon =
+        message.toLowerCase().contains('internet') ? Icons.wifi_off_rounded : Icons.warning_rounded;
 
     return Center(
       child: Padding(
@@ -61,7 +74,7 @@ class _DefaultErrorView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 60, color: Colors.grey.shade600),
+            Icon(icon, size: 60, color: Colors.orangeAccent),
             const SizedBox(height: 12),
             Text(
               message,
@@ -70,10 +83,20 @@ class _DefaultErrorView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             if (onRetry != null)
-              ElevatedButton.icon(
+              TextButton.icon(
                 onPressed: onRetry,
-                icon: const Icon(Icons.refresh),
-                label: const Text("Retry"),
+                icon: const Icon(Icons.refresh, color: Colors.white),
+                label: const Text(
+                  "Retry",
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
               ),
           ],
         ),

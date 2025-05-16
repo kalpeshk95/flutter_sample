@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_summary.dart';
+import 'package:flutter_sample/ui/screens/portfolio/search_and_sort.dart';
+import 'package:flutter_sample/ui/screens/portfolio/sort_bottom_sheet.dart';
 import 'package:flutter_sample/ui/shared/utility/extension.dart';
 import 'package:flutter_sample/ui/shared/widgets/ui_state_builder.dart';
 import 'package:provider/provider.dart';
@@ -11,43 +13,57 @@ import 'portfolio_vm.dart';
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({super.key});
 
+  void _openFilterSheet(BuildContext context) {
+    final vm = context.read<PortfolioVm>();
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) => SortBottomSheet(
+        selectedSort: vm.selectedSort,
+        direction: vm.sortDirection,
+        onSelected: vm.updateSort,
+        onClear: () {
+          vm.updateSort(SortBy.name, SortDirection.ascending);
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<PortfolioVm>(
-        builder: (context, controller, _) {
-          final vm = context.watch<PortfolioVm>();
+        builder: (_, vm, __) {
           return UiStateBuilder<List<HoldingData>>(
             uiState: vm.holdingsState,
-            onSuccess: (data) {
-              final holdings = vm.holdingsState.data!;
-              final double currValue =
-                  holdings.fold(0, (sum, item) => sum + (item.ltp * item.quantity));
-              final double currInvest =
-                  holdings.fold(0, (sum, item) => sum + (item.avgPrice * item.quantity));
-              final double todayPnL = holdings.fold(0, (sum, item) => sum + item.pnl);
-              final double totalPnL = currValue - currInvest;
-              return Column(
+            onSuccess: (_) => RefreshIndicator(
+              onRefresh: () => vm.fetchHoldings(),
+              child: Column(
                 children: [
+                  SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
+                  const Divider(height: 1),
                   Expanded(
                     child: ListView.separated(
-                      itemCount: holdings.length,
-                      itemBuilder: (context, index) => HoldingTile(
-                        holding: holdings[index],
-                      ),
+                      itemCount: vm.sortedFilteredHoldings.length,
+                      itemBuilder: (_, i) => HoldingTile(holding: vm.sortedFilteredHoldings[i]),
                       separatorBuilder: (_, __) => const Divider(),
                     ),
                   ),
                   PortfolioSummary(
-                    currValue: currValue,
-                    currInvest: currInvest,
-                    todayPnL: todayPnL,
-                    totalPnL: totalPnL,
+                    currValue: vm.currValue,
+                    currInvest: vm.currInvest,
+                    todayPnL: vm.todayPnL,
+                    totalPnL: vm.totalPnL,
                   ),
                 ],
-              );
-            },
+              ),
+            ),
             onRetry: vm.fetchHoldings,
+            showRetryOnEmpty: true,
           );
         },
       ),
