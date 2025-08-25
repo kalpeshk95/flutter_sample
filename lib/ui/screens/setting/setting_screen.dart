@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/widgets/custom_app_bar.dart';
+
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: const Text('Setting', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.deepPurple,
+  Widget build(BuildContext context) => const Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(48),
+        child: CustomAppBar(title: 'Settings'),
       ),
-      body: const Center(child: Text('Setting')));
+      body: Center(child: Text('Setting')));
 }

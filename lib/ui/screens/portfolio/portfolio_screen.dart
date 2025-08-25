@@ -6,6 +6,7 @@ import 'package:flutter_sample/ui/shared/utility/extension.dart';
 import 'package:flutter_sample/ui/shared/widgets/ui_state_builder.dart';
 import 'package:provider/provider.dart';
 
+import '../../shared/widgets/custom_app_bar.dart';
 import '../../shared/widgets/profit_loss_check.dart';
 import 'holding_data.dart';
 import 'portfolio_vm.dart';
@@ -36,6 +37,10 @@ class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(48),
+        child: CustomAppBar(title: 'Portfolio'),
+      ),
       body: Consumer<PortfolioVm>(
         builder: (_, vm, __) {
           return UiStateBuilder<List<HoldingData>>(
