@@ -1,50 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/core/remote/model/nifty/nifty_fifty.dart';
-import 'package:flutter_sample/ui/screens/wathlist/watchlist_vm.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-import '../../../core/remote/model/nifty/nifty_fifty_response.dart';
-import '../../../routing/routes.dart';
-import '../../shared/widgets/custom_app_bar.dart';
-import '../../shared/widgets/ui_state_builder.dart';
+import '../../../../core/remote/model/nifty/nifty_fifty.dart';
+import '../../../../core/remote/model/nifty/nifty_fifty_response.dart';
+import '../../../../routing/routes.dart';
 
-class WatchlistScreen extends StatefulWidget {
-  const WatchlistScreen({super.key});
-
-  @override
-  State<WatchlistScreen> createState() => _WatchlistScreenState();
+// Convert Datum to NiftyStock
+NiftyStock toStock(Datum datum) {
+  return NiftyStock(
+    symbol: datum.symbol ?? '',
+    lastPrice: datum.lastPrice ?? 0,
+    change: datum.change ?? 0,
+    pChange: datum.pChange ?? 0,
+  );
 }
 
-class _WatchlistScreenState extends State<WatchlistScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(48),
-          child: CustomAppBar(title: 'Watchlist'),
-        ),
-        body: Consumer<WatchlistVm>(builder: (_, vm, __) {
-          return UiStateBuilder<List<Datum>>(
-            uiState: vm.niftyFiftyList,
-            onSuccess: (_) => RefreshIndicator(
-              onRefresh: () => vm.fetchNiftyList(),
-              child: ListView.builder(
-                itemCount: vm.niftyStocks.length,
-                itemBuilder: (_, i) => NiftyFiftyTile(datum: vm.niftyStocks[i]),
-              ),
-            ),
-            onRetry: vm.fetchNiftyList,
-            showRetryOnEmpty: true,
-          );
-        }));
-  }
-}
-
-class NiftyFiftyTile extends StatelessWidget {
+class StockItemTile extends StatelessWidget {
   final Datum datum;
 
-  const NiftyFiftyTile({super.key, required this.datum});
+  const StockItemTile({
+    super.key,
+    required this.datum,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +44,15 @@ class NiftyFiftyTile extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(stock.symbol,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(
+                    stock.symbol,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                   const SizedBox(height: 4),
-                  Text("₹${stock.lastPrice}",
-                      style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                  Text(
+                    "₹${stock.lastPrice}",
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
                 ],
               ),
 
@@ -90,8 +71,9 @@ class NiftyFiftyTile extends StatelessWidget {
                       Text(
                         stock.change.toStringAsFixed(2),
                         style: TextStyle(
-                            color: isPositive ? Colors.green : Colors.red,
-                            fontWeight: FontWeight.bold),
+                          color: isPositive ? Colors.green : Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),

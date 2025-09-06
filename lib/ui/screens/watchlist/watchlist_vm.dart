@@ -7,8 +7,9 @@ import '../../shared/utility/ui_state.dart';
 
 class WatchlistVm extends ChangeNotifier {
   final WatchlistRepoImpl _repo;
-
-  UiState<List<Datum>> niftyFiftyList = UiState.loading();
+  
+  var _niftyFiftyList = UiState<List<Datum>>.loading();
+  UiState<List<Datum>> get niftyFiftyList => _niftyFiftyList;
 
   WatchlistVm(this._repo);
 
@@ -17,7 +18,7 @@ class WatchlistVm extends ChangeNotifier {
       request: _repo.getNiftyFiftyList,
       mapData: (response) => response.data ?? [],
       onStateChanged: (state) {
-        niftyFiftyList = state;
+        _niftyFiftyList = state;
         notifyListeners();
       },
     );
@@ -25,18 +26,23 @@ class WatchlistVm extends ChangeNotifier {
 
   /// Returns the Nifty Index (priority == 1)
   Datum? get niftyIndex {
-    if (niftyFiftyList.data == null) return null;
-    return niftyFiftyList.data!.firstWhere(
-      (item) => item.priority == 1,
-      orElse: () => Datum(),
-    );
+    final data = _niftyFiftyList.data;
+    if (data == null) return null;
+    
+    try {
+      return data.firstWhere((item) => item.priority == 1);
+    } catch (_) {
+      return null;
+    }
   }
 
   /// Returns all stocks except the index (priority == 0) sorted by symbol
   List<Datum> get niftyStocks {
-    if (niftyFiftyList.data == null) return [];
-    final stocks = niftyFiftyList.data!.where((item) => item.priority == 0).toList();
-    stocks.sort((a, b) => (a.symbol ?? '').compareTo(b.symbol ?? ''));
+    final data = _niftyFiftyList.data;
+    if (data == null || data.isEmpty) return [];
+    
+    final stocks = data.where((item) => item.priority == 0).toList()
+      ..sort((a, b) => (a.symbol ?? '').compareTo(b.symbol ?? ''));
     return stocks;
   }
 }

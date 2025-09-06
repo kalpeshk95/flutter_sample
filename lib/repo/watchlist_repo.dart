@@ -17,8 +17,8 @@ class WatchlistRepoImpl extends WatchlistRepo {
   @override
   Future<NetworkResponse<NiftyFiftyResponse>> getNiftyFiftyList() async {
     try {
-      // final response = await _apiService.getRequest('equity-stockIndices?index=NIFTY%2050');
-      final response = await rootBundle.loadString('assets/NiftyMock.json');
+      final response = await _apiService.getRequest('equity-stockIndices?index=NIFTY%2050');
+      // final response = await rootBundle.loadString('assets/NiftyMock.json');
       final data = json.decode(response.toString());
       final NiftyFiftyResponse niftyFiftyList = NiftyFiftyResponse.fromJson(data);
       return NetworkResponse.success(data: niftyFiftyList);

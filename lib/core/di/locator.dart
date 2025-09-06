@@ -1,19 +1,29 @@
+import 'package:flutter_sample/repo/portfolio_repo.dart';
+import 'package:flutter_sample/repo/user_repo.dart';
 import 'package:flutter_sample/repo/watchlist_repo.dart';
-import 'package:flutter_sample/ui/screens/wathlist/watchlist_vm.dart';
+import 'package:flutter_sample/ui/screens/portfolio/portfolio_vm.dart';
+import 'package:flutter_sample/ui/screens/watchlist/watchlist_vm.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../repo/portfolio_repo.dart';
-import '../../repo/user_repo.dart';
-import '../../ui/screens/portfolio/portfolio_vm.dart';
-
+/// Service locator instance
 final locator = GetIt.instance;
 
+/// Sets up dependency injection for the application
 void setupLocator() {
-  locator.registerLazySingleton<PortfolioRepoImpl>(() => PortfolioRepoImpl());
-  locator.registerFactory<PortfolioVm>(() => PortfolioVm(locator<PortfolioRepoImpl>()));
+  // Portfolio related dependencies
+  locator
+    ..registerLazySingleton<PortfolioRepoImpl>(PortfolioRepoImpl.new)
+    ..registerFactory<PortfolioVm>(
+      () => PortfolioVm(locator<PortfolioRepoImpl>()),
+    );
 
-  locator.registerLazySingleton<UserRepoImpl>(() => UserRepoImpl());
+  // User related dependencies
+  locator.registerLazySingleton<UserRepoImpl>(UserRepoImpl.new);
 
-  locator.registerLazySingleton<WatchlistRepoImpl>(() => WatchlistRepoImpl());
-  locator.registerFactory<WatchlistVm>(() => WatchlistVm(locator<WatchlistRepoImpl>()));
+  // Watchlist related dependencies
+  locator
+    ..registerLazySingleton<WatchlistRepoImpl>(WatchlistRepoImpl.new)
+    ..registerFactory<WatchlistVm>(
+      () => WatchlistVm(locator<WatchlistRepoImpl>()),
+    );
 }

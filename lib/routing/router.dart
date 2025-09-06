@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sample/routing/routes.dart';
-import 'package:flutter_sample/ui/screens/wathlist/watchlist_vm.dart';
+import 'package:flutter_sample/ui/screens/watchlist/watchlist_vm.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -11,8 +11,8 @@ import '../ui/screens/home/home_screen.dart';
 import '../ui/screens/portfolio/portfolio_screen.dart';
 import '../ui/screens/portfolio/portfolio_vm.dart';
 import '../ui/screens/setting/setting_screen.dart';
-import '../ui/screens/wathlist/stock_detail_page.dart';
-import '../ui/screens/wathlist/watchlist_screen.dart';
+import '../ui/screens/watchlist/stock_detail_page.dart';
+import '../ui/screens/watchlist/watchlist_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 

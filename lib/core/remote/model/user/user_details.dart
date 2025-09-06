@@ -105,17 +105,17 @@ class Education {
 
 enum Gender {
   @JsonValue("Agender")
-  AGENDER,
+  agender,
   @JsonValue("Female")
-  FEMALE,
+  female,
   @JsonValue("Male")
-  MALE
+  male
 }
 
 final genderValues = EnumValues({
-  "Agender": Gender.AGENDER,
-  "Female": Gender.FEMALE,
-  "Male": Gender.MALE
+  "Agender": Gender.agender,
+  "Female": Gender.female,
+  "Male": Gender.male
 });
 
 @JsonSerializable()
