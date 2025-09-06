@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
-  static ApiService? _instance; // Nullable instance
+  static final Map<String, ApiService> _instances = {};
   final String baseUrl;
   static const Duration timeout = Duration(milliseconds: 1000 * 300);
   final Dio _dio = Dio(BaseOptions(
@@ -12,7 +12,7 @@ class ApiService {
 
   // Factory constructor to initialize or return existing instance
   factory ApiService({required String baseUrl}) {
-    return _instance ??= ApiService._internal(baseUrl);
+    return _instances.putIfAbsent(baseUrl, () => ApiService._internal(baseUrl));
   }
 
   ApiService._internal(this.baseUrl) {

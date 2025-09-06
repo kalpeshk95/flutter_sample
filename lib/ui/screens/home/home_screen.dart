@@ -17,30 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(48),
-            child: Container(
-              color: Colors.deepPurple,
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              child: Row(
-                spacing: 10,
-                children: [
-                  const Icon(
-                    Icons.account_circle_outlined,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    destinations[widget.navigationShell.currentIndex].label,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           body: widget.navigationShell,
           bottomNavigationBar: NavigationBar(
             selectedIndex: widget.navigationShell.currentIndex,
