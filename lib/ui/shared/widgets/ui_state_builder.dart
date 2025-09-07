@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/theme/app_typography.dart';
 import '../utility/ui_state.dart';
+
+// A reusable widget that handles different UI states (loading, error, success, empty)
 
 class UiStateBuilder<T> extends StatelessWidget {
   final UiState<T> uiState;
@@ -24,34 +27,49 @@ class UiStateBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      child: _buildContent(),
+    );
+  }
+
+  Widget _buildContent() {
     switch (uiState.status) {
       case Status.loading:
         return loadingWidget ?? _buildDefaultLoader();
       case Status.error:
-        final errorMessage = uiState.error ?? "Unknown error occurred";
+        final errorMessage = uiState.error ?? 'Unknown error occurred';
         return errorBuilder?.call(errorMessage) ??
-            _DefaultErrorView(message: errorMessage, onRetry: onRetry);
+            _DefaultErrorView(
+              key: const ValueKey('error_view'),
+              message: errorMessage,
+              onRetry: onRetry,
+            );
       case Status.success:
         final data = uiState.data;
-        if (data is Iterable && data.isEmpty) {
-          return _DefaultErrorView(
-            message: emptyMessage,
-            onRetry: showRetryOnEmpty ? onRetry : null,
-          );
-        } else if (data != null) {
-          return onSuccess(data);
-        } else {
-          return _DefaultErrorView(
-            message: emptyMessage,
-            onRetry: showRetryOnEmpty ? onRetry : null,
-          );
+        if (data == null) {
+          return _buildEmptyView();
         }
+
+        if (data is Iterable && data.isEmpty) {
+          return _buildEmptyView();
+        }
+
+        return onSuccess(data);
     }
   }
 
-  Widget _buildDefaultLoader() {
-    return const Center(child: CircularProgressIndicator());
+  Widget _buildEmptyView() {
+    return _DefaultErrorView(
+      key: const ValueKey('empty_view'),
+      message: emptyMessage,
+      onRetry: showRetryOnEmpty ? onRetry : null,
+    );
   }
+}
+
+Widget _buildDefaultLoader() {
+  return const Center(child: CircularProgressIndicator());
 }
 
 class _DefaultErrorView extends StatelessWidget {
@@ -59,45 +77,52 @@ class _DefaultErrorView extends StatelessWidget {
   final VoidCallback? onRetry;
 
   const _DefaultErrorView({
+    super.key,
     required this.message,
     this.onRetry,
   });
 
   @override
   Widget build(BuildContext context) {
-    final icon =
-        message.toLowerCase().contains('internet') ? Icons.wifi_off_rounded : Icons.warning_rounded;
+    final colorScheme = Theme.of(context).colorScheme;
+    final icon = message.toLowerCase().contains('internet')
+        ? Icons.wifi_off_rounded
+        : Icons.warning_rounded;
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 60, color: Colors.orangeAccent),
-            const SizedBox(height: 12),
+            Icon(
+              icon,
+              size: 60,
+              color: Colors.orangeAccent,
+            ),
+            const SizedBox(height: 16),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16),
+              style: AppTypography.bodyLarge.copyWith(
+                color: colorScheme.onSurface,
+              ),
             ),
-            const SizedBox(height: 16),
-            if (onRetry != null)
-              TextButton.icon(
+            if (onRetry != null) ...[
+              const SizedBox(height: 24),
+              FilledButton.icon(
                 onPressed: onRetry,
-                icon: const Icon(Icons.refresh, color: Colors.white),
-                label: const Text(
-                  "Retry",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                icon: const Icon(Icons.refresh),
+                label: const Text('Retry'),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
                   ),
                 ),
               ),
+            ],
           ],
         ),
       ),

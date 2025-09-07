@@ -35,9 +35,9 @@ Map<String, dynamic> _$UserDetailsToJson(UserDetails instance) =>
     };
 
 const _$GenderEnumMap = {
-  Gender.AGENDER: 'Agender',
-  Gender.FEMALE: 'Female',
-  Gender.MALE: 'Male',
+  Gender.agender: 'Agender',
+  Gender.female: 'Female',
+  Gender.male: 'Male',
 };
 
 Education _$EducationFromJson(Map<String, dynamic> json) => Education(

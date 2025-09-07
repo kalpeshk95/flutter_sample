@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/core/theme/app_typography.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -13,34 +14,37 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.deepPurple,
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-      child: Row(
-        spacing: 10,
-        children: [
-          if (isBack)
-            InkWell(
-                onTap: () => context.pop(),
-                child: const Icon(
-                  Icons.arrow_back_outlined,
-                  color: Colors.white,
-                ))
-          else
-            const Icon(
-              Icons.account_circle_outlined,
-              color: Colors.white,
-            ),
-          Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.white,
-            ),
-          ),
-        ],
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return AppBar(
+      title: Text(
+        title,
+        style: AppTypography.titleLarge.copyWith(
+          fontWeight: FontWeight.w600,
+          color: colorScheme.onPrimary,
+        ),
       ),
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      elevation: 0,
+      automaticallyImplyLeading: isBack,
+      leading: isBack
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back_ios_rounded, size: 20),
+              onPressed: () => context.pop(),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              iconSize: 20,
+            )
+          : null,
+      titleSpacing: isBack ? 0 : null,
+      actions: [
+        if (!isBack)
+          IconButton(
+            icon: const Icon(Icons.account_circle_outlined),
+            onPressed: () {},
+          ),
+      ],
     );
   }
 }

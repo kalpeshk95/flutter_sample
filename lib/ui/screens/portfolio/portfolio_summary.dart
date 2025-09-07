@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/shared/utility/extension.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/theme/app_typography.dart';
 import '../../shared/widgets/profit_loss_check.dart';
 import 'portfolio_vm.dart';
 
@@ -70,8 +71,14 @@ class PortfolioSummary extends StatelessWidget {
             child: SummaryRow(
               title: "Profit & Loss",
               titleWidget: Row(children: [
-                const Text("Profit & Loss", style: TextStyle(fontSize: 14)),
-                Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down),
+                Text(
+                  "Profit & Loss",
+                  style: AppTypography.bodyMedium.copyWith(color: colorScheme.onSurfaceVariant),
+                ),
+                Icon(
+                  isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ]),
               valueWidget: ProfitLossCheck(
                   value: totalPnL, highLightedText: "\u{20B9} ${totalPnL.formatCurrency()}"),
@@ -93,13 +100,26 @@ class SummaryRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: Row(
         children: [
-          titleWidget ?? Text(title ?? "", style: const TextStyle(fontSize: 14)),
+          titleWidget ??
+              Text(
+                title ?? "",
+                style: AppTypography.bodyMedium.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
           const Spacer(),
-          valueWidget ?? Text(value ?? "", style: const TextStyle(fontSize: 14)),
+          valueWidget ??
+              Text(
+                value ?? "",
+                style: AppTypography.bodyMedium.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
         ],
       ),
     );
