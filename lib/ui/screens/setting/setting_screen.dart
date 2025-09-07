@@ -8,7 +8,7 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(48),
+        preferredSize: Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: 'Settings'),
       ),
       body: Center(child: Text('Setting')));

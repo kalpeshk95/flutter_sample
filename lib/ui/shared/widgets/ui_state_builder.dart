@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/theme/app_typography.dart';
 import '../utility/ui_state.dart';
 
 // A reusable widget that handles different UI states (loading, error, success, empty)
@@ -83,8 +84,7 @@ class _DefaultErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final colorScheme = Theme.of(context).colorScheme;
     final icon = message.toLowerCase().contains('internet')
         ? Icons.wifi_off_rounded
         : Icons.warning_rounded;
@@ -99,14 +99,14 @@ class _DefaultErrorView extends StatelessWidget {
             Icon(
               icon,
               size: 60,
-              color: isDark ? theme.colorScheme.secondary : Colors.orangeAccent,
+              color: Colors.orangeAccent,
             ),
             const SizedBox(height: 16),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.textTheme.bodyLarge?.color?.withOpacity(0.8),
+              style: AppTypography.bodyLarge.copyWith(
+                color: colorScheme.onSurface,
               ),
             ),
             if (onRetry != null) ...[

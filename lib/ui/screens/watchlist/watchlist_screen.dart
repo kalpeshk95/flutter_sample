@@ -28,7 +28,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(48),
+        preferredSize: Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: 'Watchlist'),
       ),
       body: Consumer<WatchlistVm>(

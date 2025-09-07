@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/remote/model/nifty/nifty_fifty.dart';
 import '../../../../core/remote/model/nifty/nifty_fifty_response.dart';
+import '../../../../core/theme/app_typography.dart';
 import '../../../../routing/routes.dart';
+import '../../../../ui/shared/widgets/profit_loss_check.dart';
 
 // Convert Datum to NiftyStock
 NiftyStock toStock(Datum datum) {
@@ -25,64 +27,85 @@ class StockItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final NiftyStock stock = toStock(datum);
     final isPositive = stock.change >= 0;
 
-    return InkWell(
-      onTap: () => context.push(Routes.stockDetailPage, extra: datum),
-      borderRadius: BorderRadius.circular(12),
-      child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        elevation: 1,
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: colorScheme.outlineVariant,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: InkWell(
+        onTap: () => context.push(Routes.stockDetailPage, extra: datum),
+        borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Symbol + CMP
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    stock.symbol,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    "₹${stock.lastPrice}",
-                    style: const TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                ],
+              // Symbol and Price
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Symbol
+                    Text(
+                      stock.symbol,
+                      style: AppTypography.titleMedium.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: colorScheme.onSurface,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    // Last Price
+                    Text(
+                      "\u20B9${stock.lastPrice.toStringAsFixed(2)}",
+                      style: AppTypography.bodyMedium.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
-              // Change + %
+              // Price Change and Percentage
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  // Price Change
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
-                        isPositive ? Icons.arrow_upward : Icons.arrow_downward,
-                        color: isPositive ? Colors.green : Colors.red,
+                        isPositive ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded,
                         size: 16,
+                        color: isPositive ? colorScheme.tertiary : colorScheme.error,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         stock.change.toStringAsFixed(2),
-                        style: TextStyle(
-                          color: isPositive ? Colors.green : Colors.red,
-                          fontWeight: FontWeight.bold,
+                        style: AppTypography.bodyMedium.copyWith(
+                          color: isPositive ? colorScheme.tertiary : colorScheme.error,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
-                  Text(
-                    "${stock.pChange.toStringAsFixed(2)}%",
-                    style: TextStyle(
-                      color: isPositive ? Colors.green : Colors.red,
-                      fontSize: 12,
-                    ),
+                  const SizedBox(height: 2),
+                  // Percentage Change
+                  ProfitLossCheck(
+                    value: stock.pChange,
+                    highLightedText: "${stock.pChange.toStringAsFixed(2)}%",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                   ),
                 ],
               ),

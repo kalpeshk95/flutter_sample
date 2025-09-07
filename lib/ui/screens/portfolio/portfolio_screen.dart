@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/core/theme/app_typography.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_summary.dart';
 import 'package:flutter_sample/ui/screens/portfolio/search_and_sort.dart';
 import 'package:flutter_sample/ui/screens/portfolio/sort_bottom_sheet.dart';
@@ -36,9 +37,12 @@ class PortfolioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
+      backgroundColor: colorScheme.surface,
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(48),
+        preferredSize: Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: 'Portfolio'),
       ),
       body: Consumer<PortfolioVm>(
@@ -46,16 +50,16 @@ class PortfolioScreen extends StatelessWidget {
           return UiStateBuilder<List<HoldingData>>(
             uiState: vm.holdingsState,
             onSuccess: (_) => RefreshIndicator(
+              color: colorScheme.primary,
               onRefresh: () => vm.fetchHoldings(),
               child: Column(
                 children: [
                   SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
                   const Divider(height: 1),
                   Expanded(
-                    child: ListView.separated(
+                    child: ListView.builder(
                       itemCount: vm.sortedFilteredHoldings.length,
                       itemBuilder: (_, i) => HoldingTile(holding: vm.sortedFilteredHoldings[i]),
-                      separatorBuilder: (_, __) => const Divider(),
                     ),
                   ),
                   PortfolioSummary(
@@ -83,37 +87,76 @@ class HoldingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                holding.symbol,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const Spacer(),
-              Text(
-                "LTP: \u{20B9} ${holding.ltp.formatCurrency()}",
-                style: const TextStyle(fontSize: 14),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Text("NET QTY: ${holding.quantity}", style: const TextStyle(fontSize: 14)),
-              const Spacer(),
-              const Text("P&L: "),
-              ProfitLossCheck(
-                value: holding.pnl,
-                highLightedText: "\u{20B9} ${holding.pnl.formatCurrency()}",
-                fontSize: 14,
-              ),
-            ],
-          ),
-        ],
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: colorScheme.outlineVariant,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // First row - Symbol and LTP
+            Row(
+              children: [
+                Text(
+                  holding.symbol,
+                  style: AppTypography.titleMedium.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  "LTP: ",
+                  style: AppTypography.bodyMedium.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                Text(
+                  "\u{20B9}${holding.ltp.formatCurrency()}",
+                  style: AppTypography.bodyMedium.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            // Second row - Quantity and P&L
+            Row(
+              children: [
+                Text(
+                  "Qty: ${holding.quantity}",
+                  style: AppTypography.bodyMedium.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  "P&L: ",
+                  style: AppTypography.bodyMedium.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                ProfitLossCheck(
+                  value: holding.pnl,
+                  highLightedText: "\u{20B9}${holding.pnl.formatCurrency()}",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

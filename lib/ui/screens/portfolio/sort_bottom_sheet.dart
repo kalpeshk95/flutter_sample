@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/core/theme/app_typography.dart';
 
 enum SortDirection { none, ascending, descending }
 
@@ -85,52 +86,118 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              children: [
-                const Text("Sort By", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      currentSort = null;
-                      currentDirection = SortDirection.none;
-                    });
-                    widget.onClear();
-                  },
-                  child: const Text("Clear"),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: SortBy.values.map((sort) {
-                final isSelected = currentSort == sort;
-                return ChoiceChip(
-                  label: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(sort.label),
-                      if (isSelected && currentDirection != SortDirection.none)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 4),
-                          child: Icon(_getSortIcon(currentDirection), size: 16),
-                        ),
-                    ],
+      child: Container(
+        decoration: BoxDecoration(
+          color: colorScheme.surface,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Drag handle
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: colorScheme.onSurfaceVariant.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  selected: isSelected,
-                  onSelected: (_) => _cycleDirection(sort),
-                );
-              }).toList(),
-            )
-          ],
+                ),
+              ),
+
+              // Header
+              Row(
+                children: [
+                  Text(
+                    'Sort By',
+                    style: AppTypography.titleLarge.copyWith(
+                      color: colorScheme.onSurface,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        currentSort = null;
+                        currentDirection = SortDirection.none;
+                      });
+                      widget.onClear();
+                    },
+                    child: Text(
+                      'Clear',
+                      style: AppTypography.labelLarge.copyWith(
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16),
+
+              // Sort options
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: SortBy.values.map((sort) {
+                  final isSelected = currentSort == sort;
+                  return ChoiceChip(
+                    label: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          sort.label,
+                          style: AppTypography.bodyMedium.copyWith(
+                            color: isSelected
+                                ? colorScheme.onPrimaryContainer
+                                : colorScheme.onSurfaceVariant,
+                            fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+                          ),
+                        ),
+                        if (isSelected && currentDirection != SortDirection.none)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 4),
+                            child: Icon(
+                              _getSortIcon(currentDirection),
+                              size: 18,
+                              color: colorScheme.onPrimaryContainer,
+                            ),
+                          ),
+                      ],
+                    ),
+                    selected: isSelected,
+                    onSelected: (_) {
+                      _cycleDirection(sort);
+                      if (currentSort == null) {
+                        Navigator.pop(context);
+                      }
+                    },
+                    backgroundColor: colorScheme.surfaceContainerHighest,
+                    selectedColor: colorScheme.primaryContainer,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(
+                        color:
+                            isSelected ? colorScheme.primaryContainer : colorScheme.outlineVariant,
+                        width: 1,
+                      ),
+                    ),
+                    elevation: 0,
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
