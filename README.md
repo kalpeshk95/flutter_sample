@@ -42,21 +42,15 @@ A beautifully structured Flutter application that simulates an investment portfo
 
 ### Light Theme
 
-| Feature | Screenshot |
-|---------|------------|
-| **Portfolio** | ![Light Portfolio](screenshots/portfolio.png) |
-| **Stock Details** | ![Light Stock Details](screenshots/stock_details.png) |
-| **Watchlist** | ![Light Watchlist](screenshots/watchlist.png) |
-| **Sorting Options** | ![Light Sorting](screenshots/sorting.png) |
+| Portfolio | Stock Details | Watchlist | Sorting |
+|-----------|---------------|-----------|---------|
+| ![Portfolio](screenshots/portfolio.png) | ![Stock Details](screenshots/stock_details.png) | ![Watchlist](screenshots/watchlist.png) | ![Sorting](screenshots/sorting.png) |
 
 ### Dark Theme
 
-| Feature | Screenshot |
-|---------|------------|
-| **Portfolio** | ![Dark Portfolio](screenshots/dark_portfolio.png) |
-| **Stock Details** | ![Dark Stock Details](screenshots/dark_stock_details.png) |
-| **Watchlist** | ![Dark Watchlist](screenshots/dark_watchlist.png) |
-| **Sorting Options** | ![Dark Sorting](screenshots/dark_sorting.png) |
+| Portfolio | Stock Details | Watchlist | Sorting |
+|-----------|---------------|-----------|---------|
+| ![Dark Portfolio](screenshots/dark_portfolio.png) | ![Dark Stock Details](screenshots/dark_stock_details.png) | ![Dark Watchlist](screenshots/dark_watchlist.png) | ![Dark Sorting](screenshots/dark_sorting.png) |
 
 *Note: All data shown in screenshots is simulated for demonstration purposes. The app features a complete light/dark theme system that respects the device's theme settings.*
 
