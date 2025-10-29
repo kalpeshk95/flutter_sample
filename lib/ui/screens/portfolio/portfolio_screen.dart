@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_summary.dart';
-import 'package:flutter_sample/ui/screens/portfolio/search_and_sort.dart';
+import 'package:flutter_sample/ui/screens/portfolio/search_filter_bar.dart';
 import 'package:flutter_sample/ui/screens/portfolio/sort_bottom_sheet.dart';
 import 'package:flutter_sample/ui/shared/utility/extension.dart';
 import 'package:flutter_sample/ui/shared/widgets/ui_state_builder.dart';
@@ -55,7 +55,7 @@ class PortfolioScreen extends StatelessWidget {
               onRefresh: vm.fetchHoldings,
               child: Column(
                 children: [
-                  SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
+                  SearchFilterBar(onFilterTap: () => _openFilterSheet(context)),
                   if (vm.sortedFilteredHoldings.isEmpty)
                     Expanded(
                       child: EmptyState(

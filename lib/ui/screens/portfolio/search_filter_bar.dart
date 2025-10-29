@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_vm.dart';
 import 'package:provider/provider.dart';
 
-class SearchAndSort extends StatelessWidget {
+class SearchFilterBar extends StatelessWidget {
   final VoidCallback onFilterTap;
 
-  const SearchAndSort({super.key, required this.onFilterTap});
+  const SearchFilterBar({super.key, required this.onFilterTap});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class SearchAndSort extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Container(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
@@ -34,17 +34,20 @@ class SearchAndSort extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          IconButton(
-            onPressed: onFilterTap,
-            style: IconButton.styleFrom(
-              backgroundColor: colorScheme.surfaceContainerHighest,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          SizedBox(
+            height: 48,
+            child: IconButton(
+              onPressed: onFilterTap,
+              style: IconButton.styleFrom(
+                backgroundColor: colorScheme.surfaceContainerHighest,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-            ),
-            icon: Icon(
-              Icons.filter_list_rounded,
-              color: colorScheme.onSurfaceVariant,
+              icon: Icon(
+                Icons.filter_list_rounded,
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
         ],
