@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/core/theme/app_typography.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_vm.dart';
 import 'package:provider/provider.dart';
 
@@ -10,91 +9,44 @@ class SearchAndSort extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSearching = context.select<PortfolioVm, bool>((vm) => vm.isSearching);
     final searchText = context.select<PortfolioVm, String>((vm) => vm.searchText);
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          if (isSearching) ...[
-            Expanded(
-              child: TextField(
-                controller: TextEditingController(text: searchText)
-                  ..selection = TextSelection.collapsed(offset: searchText.length),
-                onChanged: context.read<PortfolioVm>().updateSearch,
-                style: AppTypography.bodyMedium,
-                decoration: InputDecoration(
-                  hintText: 'Search holdings...',
-                  hintStyle: AppTypography.bodyMedium.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-                  prefixIcon: Icon(
-                    Icons.search_rounded,
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-                  filled: true,
-                  fillColor: colorScheme.surfaceContainerHighest,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: colorScheme.primary,
-                      width: 1.5,
-                    ),
-                  ),
-                ),
-                autofocus: true,
+          Expanded(
+            child: TextField(
+              controller: TextEditingController(text: searchText)
+                ..selection = TextSelection.collapsed(offset: searchText.length),
+              onChanged: context.read<PortfolioVm>().updateSearch,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurface,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Search holdings...',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
               ),
             ),
-            const SizedBox(width: 4),
-            IconButton(
-              style: IconButton.styleFrom(
-                backgroundColor: colorScheme.surfaceContainerHighest,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            onPressed: onFilterTap,
+            style: IconButton.styleFrom(
+              backgroundColor: colorScheme.surfaceContainerHighest,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              icon: Icon(
-                Icons.close_rounded,
-                color: colorScheme.onSurfaceVariant,
-              ),
-              onPressed: () => context.read<PortfolioVm>().toggleSearch(),
             ),
-          ] else ...[
-            IconButton(
-              style: IconButton.styleFrom(
-                backgroundColor: colorScheme.surfaceContainerHighest,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              icon: Icon(
-                Icons.sort_rounded,
-                color: colorScheme.primary,
-              ),
-              onPressed: onFilterTap,
+            icon: Icon(
+              Icons.filter_list_rounded,
+              color: colorScheme.onSurfaceVariant,
             ),
-            const Spacer(),
-            IconButton(
-              style: IconButton.styleFrom(
-                backgroundColor: colorScheme.surfaceContainerHighest,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              icon: Icon(
-                Icons.search_rounded,
-                color: colorScheme.primary,
-              ),
-              onPressed: () => context.read<PortfolioVm>().toggleSearch(),
-            ),
-          ]
+          ),
         ],
       ),
     );

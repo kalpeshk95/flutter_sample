@@ -10,6 +10,13 @@ class WatchlistVm extends ChangeNotifier {
   
   var _niftyFiftyList = UiState<List<Datum>>.loading();
   UiState<List<Datum>> get niftyFiftyList => _niftyFiftyList;
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+  
+  void setSearchQuery(String query) {
+    _searchQuery = query.toLowerCase();
+    notifyListeners();
+  }
 
   WatchlistVm(this._repo);
 
@@ -36,13 +43,23 @@ class WatchlistVm extends ChangeNotifier {
     }
   }
 
-  /// Returns all stocks except the index (priority == 0) sorted by symbol
+  /// Returns all stocks except the index (priority == 0) sorted by symbol and filtered by search query
   List<Datum> get niftyStocks {
     final data = _niftyFiftyList.data;
     if (data == null || data.isEmpty) return [];
     
-    final stocks = data.where((item) => item.priority == 0).toList()
-      ..sort((a, b) => (a.symbol ?? '').compareTo(b.symbol ?? ''));
+    var stocks = data.where((item) => item.priority == 0).toList();
+    
+    // Apply search filter if query is not empty
+    if (_searchQuery.isNotEmpty) {
+      stocks = stocks.where((item) => 
+        (item.symbol?.toLowerCase().contains(_searchQuery) ?? false) ||
+        (item.identifier?.toLowerCase().contains(_searchQuery) ?? false)
+      ).toList();
+    }
+    
+    // Sort by symbol
+    stocks.sort((a, b) => (a.symbol ?? '').compareTo(b.symbol ?? ''));
     return stocks;
   }
 }

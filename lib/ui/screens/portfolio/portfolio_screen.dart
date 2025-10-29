@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/core/theme/app_typography.dart';
 import 'package:flutter_sample/ui/screens/portfolio/portfolio_summary.dart';
 import 'package:flutter_sample/ui/screens/portfolio/search_and_sort.dart';
 import 'package:flutter_sample/ui/screens/portfolio/sort_bottom_sheet.dart';
@@ -7,7 +6,9 @@ import 'package:flutter_sample/ui/shared/utility/extension.dart';
 import 'package:flutter_sample/ui/shared/widgets/ui_state_builder.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/theme/app_typography.dart';
 import '../../shared/widgets/custom_app_bar.dart';
+import '../../shared/widgets/empty_state.dart';
 import '../../shared/widgets/profit_loss_check.dart';
 import 'holding_data.dart';
 import 'portfolio_vm.dart';
@@ -51,23 +52,32 @@ class PortfolioScreen extends StatelessWidget {
             uiState: vm.holdingsState,
             onSuccess: (_) => RefreshIndicator(
               color: colorScheme.primary,
-              onRefresh: () => vm.fetchHoldings(),
+              onRefresh: vm.fetchHoldings,
               child: Column(
                 children: [
                   SearchAndSort(onFilterTap: () => _openFilterSheet(context)),
-                  const Divider(height: 1),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: vm.sortedFilteredHoldings.length,
-                      itemBuilder: (_, i) => HoldingTile(holding: vm.sortedFilteredHoldings[i]),
+                  if (vm.sortedFilteredHoldings.isEmpty)
+                    Expanded(
+                      child: EmptyState(
+                        searchQuery: vm.searchText.isNotEmpty ? vm.searchText : null,
+                        emptyMessage: 'No holdings available',
+                        onClearSearch: vm.searchText.isNotEmpty ? () => vm.updateSearch('') : null,
+                      ),
+                    )
+                  else
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: vm.sortedFilteredHoldings.length,
+                        itemBuilder: (_, i) => HoldingTile(holding: vm.sortedFilteredHoldings[i]),
+                      ),
                     ),
-                  ),
-                  PortfolioSummary(
-                    currValue: vm.currValue,
-                    currInvest: vm.currInvest,
-                    todayPnL: vm.todayPnL,
-                    totalPnL: vm.totalPnL,
-                  ),
+                  if (vm.sortedFilteredHoldings.isNotEmpty)
+                    PortfolioSummary(
+                      currValue: vm.currValue,
+                      currInvest: vm.currInvest,
+                      todayPnL: vm.todayPnL,
+                      totalPnL: vm.totalPnL,
+                    ),
                 ],
               ),
             ),
