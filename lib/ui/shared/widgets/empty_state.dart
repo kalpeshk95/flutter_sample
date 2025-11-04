@@ -1,4 +1,3 @@
-// lib/ui/shared/widgets/empty_state.dart
 import 'package:flutter/material.dart';
 
 class EmptyState extends StatelessWidget {
@@ -32,16 +31,15 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            customIcon ?? Icon(
-              isSearching ? Icons.search_off_rounded : Icons.inbox_rounded,
-              size: 64,
-              color: theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
-            ),
+            customIcon ??
+                Icon(
+                  isSearching ? Icons.search_off_rounded : Icons.inbox_rounded,
+                  size: 64,
+                  color: theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
+                ),
             const SizedBox(height: 16),
             Text(
-              isSearching
-                  ? searchMessage ?? 'No results found'
-                  : emptyMessage,
+              isSearching ? searchMessage ?? 'No results found' : emptyMessage,
               style: theme.textTheme.titleMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
@@ -61,7 +59,11 @@ class EmptyState extends StatelessWidget {
               const SizedBox(height: 24),
               FilledButton.icon(
                 onPressed: onClearSearch,
-                icon: const Icon(Icons.clear_rounded, size: 18),
+                icon: Icon(
+                  Icons.clear_rounded,
+                  size: 18,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
                 label: const Text('Clear search'),
                 style: FilledButton.styleFrom(
                   backgroundColor: theme.colorScheme.surfaceVariant,

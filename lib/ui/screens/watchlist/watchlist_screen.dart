@@ -28,48 +28,47 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(title: 'Watchlist'),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Consumer<WatchlistVm>(
-              builder: (context, vm, _) => TextField(
-                controller: TextEditingController(text: vm.searchQuery),
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Search stocks...',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                ),
-                onChanged: vm.setSearchQuery,
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: CustomAppBar(title: 'Watchlist'),
+        ),
+        body: Consumer<WatchlistVm>(
+          builder: (context, vm, _) {
+            return RefreshIndicator(
+              onRefresh: vm.fetchNiftyList,
+              child: UiStateBuilder<List<Datum>>(
+                uiState: vm.niftyFiftyList,
+                onSuccess: (_) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Consumer<WatchlistVm>(
+                          builder: (context, vm, _) => TextField(
+                            controller: TextEditingController(text: vm.searchQuery),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: theme.colorScheme.onSurface,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: 'Search stocks...',
+                              prefixIcon: const Icon(Icons.search),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                              contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                            ),
+                            onChanged: vm.setSearchQuery,
+                          ),
+                        ),
+                      ),
+                      Expanded(child: _buildStockList(vm)),
+                    ],
+                  );
+                },
+                onRetry: vm.fetchNiftyList,
+                showRetryOnEmpty: true,
               ),
-            ),
-          ),
-          Expanded(
-            child: Consumer<WatchlistVm>(
-              builder: (context, vm, _) {
-                return RefreshIndicator(
-                  onRefresh: vm.fetchNiftyList,
-                  child: UiStateBuilder<List<Datum>>(
-                    uiState: vm.niftyFiftyList,
-                    onSuccess: (_) => _buildStockList(vm),
-                    onRetry: vm.fetchNiftyList,
-                    showRetryOnEmpty: true,
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+            );
+          },
+        ));
   }
 
   Widget _buildStockList(WatchlistVm vm) {
