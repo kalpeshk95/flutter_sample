@@ -8,7 +8,7 @@ import 'holding_data.dart';
 import 'sort_bottom_sheet.dart';
 
 class PortfolioVm extends ChangeNotifier {
-  final PortfolioRepoImpl _repo;
+  final PortfolioRepo _repo;
 
   UiState<List<HoldingData>> holdingsState = UiState.loading();
   bool isSearching = false;

@@ -1,27 +1,10 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
-  static final Map<String, ApiService> _instances = {};
   final String baseUrl;
-  static const Duration timeout = Duration(milliseconds: 1000 * 300);
-  final Dio _dio = Dio(BaseOptions(
-    receiveTimeout: timeout,
-    connectTimeout: timeout,
-    sendTimeout: timeout,
-  ));
+  final Dio _dio;
 
-  // Factory constructor to initialize or return existing instance
-  factory ApiService({required String baseUrl}) {
-    return _instances.putIfAbsent(baseUrl, () => ApiService._internal(baseUrl));
-  }
-
-  ApiService._internal(this.baseUrl) {
-    _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-      options.baseUrl = baseUrl;
-      return handler.next(options);
-    }));
-    // _dio.interceptors.add(Logging(_dio));
-  }
+  ApiService({required Dio dio, required this.baseUrl}) : _dio = dio..options.baseUrl = baseUrl;
 
   Future<Response<T>> getRequest<T>(String url,
       {Map<String, dynamic> queryParam = const {},

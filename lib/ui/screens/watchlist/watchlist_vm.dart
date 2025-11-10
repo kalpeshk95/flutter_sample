@@ -6,13 +6,15 @@ import '../../../repo/watchlist_repo.dart';
 import '../../shared/utility/ui_state.dart';
 
 class WatchlistVm extends ChangeNotifier {
-  final WatchlistRepoImpl _repo;
-  
+  final WatchlistRepo _repo;
+
   var _niftyFiftyList = UiState<List<Datum>>.loading();
+
   UiState<List<Datum>> get niftyFiftyList => _niftyFiftyList;
   String _searchQuery = '';
+
   String get searchQuery => _searchQuery;
-  
+
   void setSearchQuery(String query) {
     _searchQuery = query.toLowerCase();
     notifyListeners();
@@ -35,7 +37,7 @@ class WatchlistVm extends ChangeNotifier {
   Datum? get niftyIndex {
     final data = _niftyFiftyList.data;
     if (data == null) return null;
-    
+
     try {
       return data.firstWhere((item) => item.priority == 1);
     } catch (_) {
@@ -47,17 +49,18 @@ class WatchlistVm extends ChangeNotifier {
   List<Datum> get niftyStocks {
     final data = _niftyFiftyList.data;
     if (data == null || data.isEmpty) return [];
-    
+
     var stocks = data.where((item) => item.priority == 0).toList();
-    
+
     // Apply search filter if query is not empty
     if (_searchQuery.isNotEmpty) {
-      stocks = stocks.where((item) => 
-        (item.symbol?.toLowerCase().contains(_searchQuery) ?? false) ||
-        (item.identifier?.toLowerCase().contains(_searchQuery) ?? false)
-      ).toList();
+      stocks = stocks
+          .where((item) =>
+              (item.symbol?.toLowerCase().contains(_searchQuery) ?? false) ||
+              (item.identifier?.toLowerCase().contains(_searchQuery) ?? false))
+          .toList();
     }
-    
+
     // Sort by symbol
     stocks.sort((a, b) => (a.symbol ?? '').compareTo(b.symbol ?? ''));
     return stocks;
