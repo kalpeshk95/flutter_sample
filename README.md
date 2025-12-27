@@ -20,9 +20,10 @@ A beautifully structured Flutter application that simulates an investment portfo
 ## ✨ Features
 
 ### 📊 Portfolio Management
-- ✅ Real-time summary of Current Value, Investment & Profit/Loss (using simulated data)
+- ✅ Real-time summary of Current Value, Investment & Profit/Loss (using simulated data from NiftyMock.json)
 - 📱 Responsive design that works on mobile and tablet
 - 💾 All data is locally generated and simulated for demonstration
+- 🌓 Built-in light and dark theme support
 
 ### 🔍 Search & Filter
 - 🔍 Instant search across all holdings
@@ -42,15 +43,15 @@ A beautifully structured Flutter application that simulates an investment portfo
 
 ### Light Theme
 
-| Portfolio | Stock Details | Watchlist | Sorting |
-|-----------|---------------|-----------|---------|
-| ![Portfolio](screenshots/portfolio.png) | ![Stock Details](screenshots/stock_details.png) | ![Watchlist](screenshots/watchlist.png) | ![Sorting](screenshots/sorting.png) |
+| Portfolio | Stock Details | Watchlist | Sorting | No Data |
+|-----------|---------------|-----------|---------|---------|
+| ![Portfolio](screenshots/portfolio.png) | ![Stock Details](screenshots/stock_details.png) | ![Watchlist](screenshots/watchlist.png) | ![Sorting](screenshots/sorting.png) | ![No Data](screenshots/no_data.png) |
 
 ### Dark Theme
 
-| Portfolio | Stock Details | Watchlist | Sorting |
-|-----------|---------------|-----------|---------|
-| ![Dark Portfolio](screenshots/dark_portfolio.png) | ![Dark Stock Details](screenshots/dark_stock_details.png) | ![Dark Watchlist](screenshots/dark_watchlist.png) | ![Dark Sorting](screenshots/dark_sorting.png) |
+| Portfolio | Stock Details | Watchlist | Sorting |No Data |
+|-----------|---------------|-----------|---------|--------|
+| ![Dark Portfolio](screenshots/dark_portfolio.png) | ![Dark Stock Details](screenshots/dark_stock_details.png) | ![Dark Watchlist](screenshots/dark_watchlist.png) | ![Dark Sorting](screenshots/dark_sorting.png) | ![No Data](screenshots/dark_no_data.png) |
 
 *Note: All data shown in screenshots is simulated for demonstration purposes. The app features a complete light/dark theme system that respects the device's theme settings.*
 
@@ -59,8 +60,8 @@ A beautifully structured Flutter application that simulates an investment portfo
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Flutter SDK (>=3.19.0)
-- Dart SDK (>=3.3.0)
+- Flutter SDK (>=3.5.4)
+- Dart SDK (>=3.5.4)
 - Android Studio / VS Code with Flutter extensions
 - Android Emulator or physical device
 
@@ -161,26 +162,30 @@ lib/
 |---------|---------|----------|
 | `provider` | ^6.1.4 | State management |
 | `get_it` | ^8.0.3 | Service locator for dependency injection |
+| `connectivity_plus` | ^6.1.3 | Network connectivity status |
 
 ### Navigation
 | Package | Version | Purpose |
 |---------|---------|----------|
-| `go_router` | ^14.6.2 | Declarative routing solution |
+| `go_router` | ^17.0.0 | Declarative routing solution |
 
 ### Network & Data
 | Package | Version | Purpose |
 |---------|---------|----------|
-| `dio` | ^5.7.0 | HTTP client |
+| `dio` | ^5.9.0 | HTTP client |
 | `json_annotation` | ^4.9.0 | JSON serialization annotations |
 | `json_serializable` | ^6.8.0 | Code generation for JSON serialization |
-| `freezed` | ^2.5.7 | Code generation for immutable classes |
-| `freezed_annotation` | ^2.4.4 | Annotations for freezed |
+| `freezed` | ^3.2.3 | Code generation for immutable classes |
+| `freezed_annotation` | ^3.1.0 | Annotations for freezed |
 
 ### UI Components
 | Package | Version | Purpose |
 |---------|---------|----------|
 | `shimmer_animation` | ^2.2.2 | Shimmer loading effect |
 | `intl` | ^0.20.2 | Internationalization and localization |
+
+### Fonts
+- Poppins (300, 400, 500, 600, 700 weights)
 
 ### Utilities
 | Package | Version | Purpose |
