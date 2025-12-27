@@ -45,7 +45,8 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         child: Consumer<WatchlistVm>(
                           builder: (context, vm, _) => TextField(
-                            controller: TextEditingController(text: vm.searchQuery),
+                            controller: TextEditingController(text: vm.searchQuery)
+                              ..selection = TextSelection.collapsed(offset: vm.searchQuery.length),
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: theme.colorScheme.onSurface,
                             ),
