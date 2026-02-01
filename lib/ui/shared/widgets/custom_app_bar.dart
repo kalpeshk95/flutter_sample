@@ -1,50 +1,117 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/core/theme/app_typography.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 
-class CustomAppBar extends StatelessWidget {
+import '../../../core/theme/app_typography.dart';
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  final bool showBackButton;
+  final List<Widget>? actions;
+  final VoidCallback? onBackPressed;
+  final bool centerTitle;
+  final Color? backgroundColor;
+  final double elevation;
+  final double? titleSpacing;
+  final Widget? leading;
+  final double? toolbarHeight;
+
   const CustomAppBar({
     super.key,
     required this.title,
-    this.isBack = false,
+    this.showBackButton = true,
+    this.actions,
+    this.onBackPressed,
+    this.centerTitle = false,
+    this.backgroundColor,
+    this.elevation = 0,
+    this.titleSpacing = 16,
+    this.leading,
+    this.toolbarHeight = kToolbarHeight,
   });
-
-  final String title;
-  final bool isBack;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = context.colorScheme;
 
     return AppBar(
       title: Text(
         title,
-        style: AppTypography.titleLarge.copyWith(
-          fontWeight: FontWeight.w600,
-          color: colorScheme.onPrimary,
-        ),
+        style: AppTypography.twentyTwo.bold.withColor(colorScheme.onSurface),
       ),
-      backgroundColor: colorScheme.primary,
-      foregroundColor: colorScheme.onPrimary,
-      elevation: 0,
-      automaticallyImplyLeading: isBack,
-      leading: isBack
-          ? IconButton(
-              icon: const Icon(Icons.arrow_back_ios_rounded, size: 20),
-              onPressed: () => context.pop(),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              iconSize: 20,
-            )
+      centerTitle: centerTitle,
+      backgroundColor: backgroundColor ?? Colors.transparent,
+      elevation: elevation,
+      titleSpacing: titleSpacing,
+      automaticallyImplyLeading: showBackButton,
+      leading: showBackButton
+          ? (leading ??
+              IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: colorScheme.onSurface,
+                  size: 20,
+                ),
+                onPressed: () {
+                  if (onBackPressed != null) {
+                    onBackPressed!();
+                  } else {
+                    Navigator.of(context).pop();
+                  }
+                },
+              ))
           : null,
-      titleSpacing: isBack ? 0 : null,
       actions: [
-        if (!isBack)
-          IconButton(
-            icon: const Icon(Icons.account_circle_outlined),
-            onPressed: () {},
-          ),
+        if (actions != null) ...actions!,
+        const SizedBox(width: 8),
       ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(toolbarHeight!);
+
+  // Predefined styles
+  factory CustomAppBar.primary({
+    required BuildContext context,
+    required String title,
+    List<Widget>? actions,
+    VoidCallback? onBackPressed,
+  }) {
+    return CustomAppBar(
+      title: title,
+      backgroundColor: context.colorScheme.primary,
+      elevation: 2,
+      actions: actions,
+      onBackPressed: onBackPressed,
+    );
+  }
+
+  factory CustomAppBar.elevated({
+    required BuildContext context,
+    required String title,
+    List<Widget>? actions,
+    VoidCallback? onBackPressed,
+  }) {
+    return CustomAppBar(
+      title: title,
+      backgroundColor: context.colorScheme.surface,
+      elevation: 4,
+      actions: actions,
+      onBackPressed: onBackPressed,
+    );
+  }
+
+  factory CustomAppBar.transparent({
+    required String title,
+    List<Widget>? actions,
+    VoidCallback? onBackPressed,
+  }) {
+    return CustomAppBar(
+      title: title,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: actions,
+      onBackPressed: onBackPressed,
     );
   }
 }

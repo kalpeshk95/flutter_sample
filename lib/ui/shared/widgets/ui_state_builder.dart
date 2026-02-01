@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_typography.dart';
+import '../../../core/theme/text_style_extensions.dart';
 import '../utility/ui_state.dart';
 
 // A reusable widget that handles different UI states (loading, error, success, empty)
@@ -41,7 +42,7 @@ class UiStateBuilder<T> extends StatelessWidget {
         final errorMessage = uiState.error ?? 'Unknown error occurred';
         return errorBuilder?.call(errorMessage) ??
             _DefaultErrorView(
-              key: const ValueKey('error_view'),
+              key: ValueKey('error_view_${errorMessage.hashCode}'),
               message: errorMessage,
               onRetry: onRetry,
             );
@@ -61,7 +62,7 @@ class UiStateBuilder<T> extends StatelessWidget {
 
   Widget _buildEmptyView() {
     return _DefaultErrorView(
-      key: const ValueKey('empty_view'),
+      key: ValueKey('empty_view_${emptyMessage.hashCode}'),
       message: emptyMessage,
       onRetry: showRetryOnEmpty ? onRetry : null,
     );
@@ -84,7 +85,7 @@ class _DefaultErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = context.colorScheme;
     final icon = message.toLowerCase().contains('internet')
         ? Icons.wifi_off_rounded
         : Icons.warning_rounded;
@@ -105,9 +106,7 @@ class _DefaultErrorView extends StatelessWidget {
             Text(
               message,
               textAlign: TextAlign.center,
-              style: AppTypography.bodyLarge.copyWith(
-                color: colorScheme.onSurface,
-              ),
+              style: AppTypography.sixteen.withColor(colorScheme.onSurface),
             ),
             if (onRetry != null) ...[
               const SizedBox(height: 24),

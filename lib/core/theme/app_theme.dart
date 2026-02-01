@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 import 'app_typography.dart';
 
 class AppTheme {
@@ -12,17 +13,10 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       fontFamily: AppTypography.primaryFont,
-      textTheme: AppTypography.textTheme.apply(
-        displayColor: colorScheme.onSurface,
-        bodyColor: colorScheme.onSurface,
-      ),
       appBarTheme: AppBarTheme(
         elevation: 0,
         centerTitle: false,
-        titleTextStyle: AppTypography.titleLarge.copyWith(
-          fontWeight: FontWeight.w600,
-          color: colorScheme.onSurface,
-        ),
+        titleTextStyle: AppTypography.twentyTwo.semiBold.withColor(colorScheme.onSurface),
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
       ),
@@ -81,9 +75,7 @@ class AppTheme {
       appBarTheme: lightTheme.appBarTheme.copyWith(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
-        titleTextStyle: lightTheme.appBarTheme.titleTextStyle?.copyWith(
-          color: colorScheme.onSurface,
-        ),
+        titleTextStyle: lightTheme.appBarTheme.titleTextStyle?.withColor(colorScheme.onSurface),
       ),
       cardTheme: lightTheme.cardTheme.copyWith(
         color: colorScheme.surfaceContainerHighest,

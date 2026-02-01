@@ -5,7 +5,7 @@ import '../../../core/remote/utility/api_executor.dart';
 import '../../../repo/portfolio_repo.dart';
 import '../../shared/utility/ui_state.dart';
 import 'holding_data.dart';
-import 'sort_bottom_sheet.dart';
+import 'widget/sort_bottom_sheet.dart';
 
 class PortfolioVm extends ChangeNotifier {
   final PortfolioRepo _repo;
@@ -71,6 +71,8 @@ class PortfolioVm extends ChangeNotifier {
         SortBy.pnl => (HoldingData a, HoldingData b) => a.pnl.compareTo(b.pnl),
       };
       list.sort(sortDirection == SortDirection.ascending ? comparator : (a, b) => comparator(b, a));
+    } else {
+      list.sort((a, b) => a.symbol.compareTo(b.symbol));
     }
 
     return list;

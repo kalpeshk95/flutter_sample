@@ -3,134 +3,82 @@ import 'package:flutter/material.dart';
 class AppTypography {
   // Font family
   static const String primaryFont = 'Poppins';
-  
+
   // Text styles
-  static const TextStyle displayLarge = TextStyle(
+  static const TextStyle ten = TextStyle(
     fontFamily: primaryFont,
-    fontSize: 57,
-    fontWeight: FontWeight.w300,
+    fontSize: 10,
+    letterSpacing: 1.5,
   );
 
-  static const TextStyle displayMedium = TextStyle(
+  static const TextStyle eleven = TextStyle(
     fontFamily: primaryFont,
-    fontSize: 45,
-    fontWeight: FontWeight.w300,
-  );
-
-  static const TextStyle displaySmall = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 36,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const TextStyle headlineLarge = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 32,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const TextStyle headlineMedium = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 28,
-    fontWeight: FontWeight.w500,
-  );
-
-  static const TextStyle headlineSmall = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 24,
-    fontWeight: FontWeight.w500,
-  );
-
-  static const TextStyle titleLarge = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 22,
-    fontWeight: FontWeight.w500,
-  );
-
-  static const TextStyle titleMedium = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.15,
-  );
-
-  static const TextStyle titleSmall = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
-  );
-
-  static const TextStyle bodyLarge = TextStyle(
-    fontFamily: primaryFont,
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontSize: 11,
     letterSpacing: 0.5,
   );
 
-  static const TextStyle bodyMedium = TextStyle(
+  static const TextStyle twelve = TextStyle(
+    fontFamily: primaryFont,
+    fontSize: 12,
+    letterSpacing: 0.5,
+  );
+
+  static const TextStyle fourteen = TextStyle(
     fontFamily: primaryFont,
     fontSize: 14,
-    fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
   );
 
-  static const TextStyle bodySmall = TextStyle(
+  static const TextStyle sixteen = TextStyle(
     fontFamily: primaryFont,
-    fontSize: 12,
-    fontWeight: FontWeight.w400,
+    fontSize: 16,
+    letterSpacing: 0.5,
+  );
+
+  static const TextStyle eighteen = TextStyle(
+    fontFamily: primaryFont,
+    fontSize: 18,
     letterSpacing: 0.4,
   );
 
-  static const TextStyle labelLarge = TextStyle(
+  static const TextStyle twenty = TextStyle(
     fontFamily: primaryFont,
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
+    fontSize: 20,
+    letterSpacing: 0.14,
   );
 
-  static const TextStyle labelMedium = TextStyle(
+  static const TextStyle twentyTwo = TextStyle(
     fontFamily: primaryFont,
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
+    fontSize: 22,
+    letterSpacing: 0.0,
   );
 
-  static const TextStyle labelSmall = TextStyle(
+  static const TextStyle twentyFour = TextStyle(
     fontFamily: primaryFont,
-    fontSize: 11,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
+    fontSize: 24,
+    letterSpacing: 0.0,
   );
 
-  // Helper method to get the text theme
-  static TextTheme get textTheme {
-    return const TextTheme(
-      displayLarge: displayLarge,
-      displayMedium: displayMedium,
-      displaySmall: displaySmall,
-      headlineLarge: headlineLarge,
-      headlineMedium: headlineMedium,
-      headlineSmall: headlineSmall,
-      titleLarge: titleLarge,
-      titleMedium: titleMedium,
-      titleSmall: titleSmall,
-      bodyLarge: bodyLarge,
-      bodyMedium: bodyMedium,
-      bodySmall: bodySmall,
-      labelLarge: labelLarge,
-      labelMedium: labelMedium,
-      labelSmall: labelSmall,
-    );
-  }
+  static const TextStyle twentySix = TextStyle(
+    fontFamily: primaryFont,
+    fontSize: 26,
+    letterSpacing: 0.0,
+  );
 
-  // Helper method to create custom text styles
-  static TextStyle style({
+  static const TextStyle twentyEight = TextStyle(
+    fontFamily: primaryFont,
+    fontSize: 28,
+    letterSpacing: 0.0,
+  );
+
+  // Helper to create custom text styles
+  static TextStyle custom({
     double? fontSize,
     FontWeight? fontWeight,
     Color? color,
     double? height,
     double? letterSpacing,
+    String? fontFamily,
   }) {
     return TextStyle(
       fontFamily: primaryFont,
