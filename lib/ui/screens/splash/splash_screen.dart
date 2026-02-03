@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/di/locator.dart';
@@ -199,7 +200,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                           opacity: _logoFadeAnimation,
                           child: ScaleTransition(
                             scale: _logoScaleAnimation,
-                            child: _buildLogo(colorScheme),
+                            child: SvgPicture.asset(
+                              'assets/images/finwise_app_icon.svg',
+                              width: 200,
+                              height: 200,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 32),
@@ -208,7 +213,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                           child: Column(
                             children: [
                               Text(
-                                'Flutter Sample',
+                                'FinWise',
                                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: colorScheme.primary,
@@ -217,7 +222,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Your Financial Companion',
+                                'Smart Financial Decisions',
                                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                       color: colorScheme.onSurface.withOpacity(0.7),
                                       letterSpacing: 0.3,
@@ -276,36 +281,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildLogo(ColorScheme colorScheme) {
-    return Container(
-      width: 120,
-      height: 120,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            colorScheme.primary,
-            colorScheme.primaryContainer,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.primary.withAlpha(77),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Icon(
-        Icons.account_balance,
-        size: 60,
-        color: colorScheme.onPrimary,
       ),
     );
   }

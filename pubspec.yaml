@@ -50,6 +50,7 @@ dependencies:
   flutter_svg: 2.2.3
 
 dev_dependencies:
+  flutter_launcher_icons: 0.14.4
   flutter_test:
     sdk: flutter
 
@@ -62,6 +63,14 @@ dev_dependencies:
   build_runner: ^2.4.13
   json_serializable: ^6.8.0
 
+# Flutter Launcher Icons configuration
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/app_icon.png"
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -69,7 +78,7 @@ dev_dependencies:
 flutter:
 
   # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
+  # included with your application, so that you can use the icon in
   # the material Icons class.
   uses-material-design: true
 

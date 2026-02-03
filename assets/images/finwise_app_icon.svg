@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="iconGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#64B5F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFC107;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Square background -->
+  <rect width="1024" height="1024" rx="180" fill="url(#iconGrad1)" />
+  
+  <!-- Brain/Chart hybrid shape centered - Increased size -->
+  <g transform="translate(512, 512) scale(2.3)">
+    <!-- Left hemisphere - Chart bars -->
+    <rect x="-120" y="-80" width="30" height="160" rx="15" fill="url(#iconGrad2)" opacity="0.9" />
+    <rect x="-70" y="-120" width="30" height="240" rx="15" fill="url(#iconGrad2)" opacity="0.9" />
+    <rect x="-20" y="-60" width="30" height="120" rx="15" fill="url(#iconGrad2)" opacity="0.9" />
+    
+    <!-- Right hemisphere - Brain curves -->
+    <path d="M 40 -80 Q 80 -60, 100 -20 T 90 40 Q 70 80, 40 90 Q 20 95, 0 90 Q -20 80, -30 60" 
+          fill="none" stroke="url(#iconGrad2)" stroke-width="25" stroke-linecap="round" opacity="0.9" />
+    <path d="M 60 -40 Q 90 -30, 110 0 T 100 60 Q 80 90, 50 100" 
+          fill="none" stroke="url(#iconGrad2)" stroke-width="20" stroke-linecap="round" opacity="0.9" />
+    
+    <!-- Center connecting element - F letter -->
+    <circle cx="0" cy="0" r="45" fill="#ffffff" opacity="0.95" />
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#1976D2" text-anchor="middle">F</text>
+    
+    <!-- Wisdom spark - Small star accent -->
+    <path d="M 120 -120 L 125 -108 L 137 -110 L 127 -103 L 130 -93 L 120 -100 L 110 -93 L 113 -103 L 105 -110 L 115 -108 Z" 
+          fill="url(#accentGrad)" opacity="0.8" />
+    
+    <!-- Additional decorative elements -->
+    <circle cx="-140" cy="-140" r="8" fill="#ffffff" opacity="0.6" />
+    <circle cx="140" cy="140" r="8" fill="#ffffff" opacity="0.6" />
+    <circle cx="-140" cy="140" r="6" fill="#ffffff" opacity="0.4" />
+    <circle cx="140" cy="-140" r="6" fill="#ffffff" opacity="0.4" />
+  </g>
+</svg>
