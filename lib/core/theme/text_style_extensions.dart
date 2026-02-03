@@ -31,7 +31,7 @@ extension TextStyleExtension on TextStyle {
   TextStyle withColor(Color color) => copyWith(color: color);
 
   TextStyle withOpacity(double opacity) => copyWith(
-        color: color?.withOpacity(opacity),
+        color: color?.withAlpha((255 * opacity).toInt()),
       );
 
   // Size helpers

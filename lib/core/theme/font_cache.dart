@@ -1,7 +1,6 @@
 // lib/core/theme/font_cache.dart
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class FontCache {
   static final Map<String, Future<ByteData>> _fontCache = {};

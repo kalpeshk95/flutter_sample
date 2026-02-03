@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/core/di/locator.dart';
 import 'package:flutter_sample/core/theme/app_theme.dart';
 import 'package:flutter_sample/routing/router.dart';
 
 void main() {
-  setupLocator();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

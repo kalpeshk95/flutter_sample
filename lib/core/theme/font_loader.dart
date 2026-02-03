@@ -1,5 +1,4 @@
 // lib/core/theme/font_loader.dart
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FontLoaderUtil {
