@@ -4,23 +4,21 @@ import 'package:flutter_sample/routing/router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const FinWiseApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FinWiseApp extends StatelessWidget {
+  const FinWiseApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'FinWise - Smart Financial Decisions',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
     );
-    // This is the theme of your application.
   }
 }

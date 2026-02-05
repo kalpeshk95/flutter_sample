@@ -94,7 +94,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       _updateLoadingMessage('Checking connectivity...');
       final connectivityResult = await Connectivity().checkConnectivity();
 
-      if (connectivityResult == ConnectivityResult.none) {
+      if (connectivityResult.contains(ConnectivityResult.none)) {
         _updateLoadingMessage('Offline mode detected...');
       }
 
