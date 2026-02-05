@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../routing/destination.dart';
-import '../../../routing/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.navigationShell});
@@ -14,42 +14,74 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void _onDestinationSelected(int index) => widget.navigationShell.goBranch(index);
+
   @override
-  Widget build(BuildContext context) => SafeArea(
-        child: Scaffold(
-          body: widget.navigationShell,
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: widget.navigationShell.currentIndex,
-            onDestinationSelected: widget.navigationShell.goBranch,
-            indicatorColor: Theme.of(context).primaryColor,
-            destinations: destinations
-                .map(
-                  (destination) => NavigationDestination(
-                    icon: Icon(destination.icon),
-                    label: destination.label,
-                    selectedIcon: Icon(
-                      destination.icon,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
+  Widget build(BuildContext context) {
+    final colorScheme = context.colorScheme;
+
+    return Scaffold(
+      body: ColoredBox(
+        color: colorScheme.surface,
+        child: SafeArea(
+          bottom: false,
+          child: widget.navigationShell,
         ),
-      );
+      ),
+      bottomNavigationBar: _BottomNavBar(
+        currentIndex: widget.navigationShell.currentIndex,
+        onDestinationSelected: _onDestinationSelected,
+        colorScheme: colorScheme,
+      ),
+    );
+  }
+}
 
-  bool checkRoute() {
-    final currentLocation = GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
+class _BottomNavBar extends StatelessWidget {
+  const _BottomNavBar({
+    required this.currentIndex,
+    required this.onDestinationSelected,
+    required this.colorScheme,
+  });
 
-    if (currentLocation == Routes.portfolioPage) {
-      return true; // Allow the pop to proceed
-    } else {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          GoRouter.of(context).go(Routes.portfolioPage); // Navigate to the default route
-        }
-      });
-      return false; // Prevent immediate pop
-    }
+  final int currentIndex;
+  final ValueChanged<int> onDestinationSelected;
+  final ColorScheme colorScheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        boxShadow: [
+          BoxShadow(
+            color: context.colorScheme.onSurfaceVariant.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: NavigationBar(
+        selectedIndex: currentIndex,
+        onDestinationSelected: onDestinationSelected,
+        backgroundColor: colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        indicatorColor: colorScheme.primary,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        destinations: destinations.map((destination) {
+          final isSelected = destinations.indexOf(destination) == currentIndex;
+          final color = isSelected ? colorScheme.onPrimary : colorScheme.onSurface.withOpacity(0.6);
+
+          return NavigationDestination(
+            icon: Icon(destination.icon, color: color),
+            label: destination.label,
+            selectedIcon: Icon(
+              destination.icon,
+              color: colorScheme.onPrimary,
+            ),
+          );
+        }).toList(),
+      ),
+    );
   }
 }

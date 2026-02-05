@@ -10,14 +10,28 @@ import '../ui/screens/empty/empty_screen.dart';
 import '../ui/screens/home/home_screen.dart';
 import '../ui/screens/portfolio/portfolio_screen.dart';
 import '../ui/screens/portfolio/portfolio_vm.dart';
+import '../ui/screens/profile/profile_screen.dart';
 import '../ui/screens/setting/setting_screen.dart';
+import '../ui/screens/splash/splash_screen.dart';
 import '../ui/screens/watchlist/stock_detail_page.dart';
 import '../ui/screens/watchlist/watchlist_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
 final router =
-    GoRouter(navigatorKey: _rootNavigatorKey, initialLocation: Routes.portfolioPage, routes: [
+    GoRouter(navigatorKey: _rootNavigatorKey, initialLocation: Routes.splashScreen, routes: [
+  // Splash Screen Route
+  GoRoute(
+    path: Routes.splashScreen,
+    builder: (context, state) => const SplashScreen(),
+  ),
+
+  // Root route that will show the main app
+  GoRoute(
+    path: '/',
+    redirect: (context, state) => Routes.portfolioPage, // Redirect root to portfolio tab
+  ),
+
   StatefulShellRoute.indexedStack(
     builder: (context, state, navigationShell) => HomeScreen(navigationShell: navigationShell),
     branches: [
@@ -56,7 +70,7 @@ final router =
       StatefulShellBranch(routes: [
         GoRoute(
             path: Routes.profilePage,
-            builder: (context, state) => const EmptyScreen(title: 'Users'),
+            builder: (context, state) => const ProfileScreen(),
             routes: [
               GoRoute(
                   path: Routes.nestedProfilePage,

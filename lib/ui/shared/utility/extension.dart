@@ -2,14 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-extension ThemeContextExtension on BuildContext {
-  bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+extension ColorExtension on num {
+  Color get getPLColor => this >= 0 ? Colors.green : Colors.red;
 }
 
 extension CurrencyFormatter on double {
   String formatCurrency() {
     final formatter = NumberFormat("#,##0.00"); // Format with commas
-    return formatter.format(this); // Format the double value
+    return "\u{20B9}${formatter.format(this)}"; // Format the double value
   }
 }
 

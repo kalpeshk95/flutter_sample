@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/core/remote/model/nifty/nifty_fifty_response.dart';
+import 'package:flutter_sample/core/theme/text_style_extensions.dart';
+import 'package:flutter_sample/ui/shared/utility/extension.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/remote/model/nifty/nifty_fifty.dart';
-import '../../../../core/remote/model/nifty/nifty_fifty_response.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../routing/routes.dart';
-import '../../../../ui/shared/widgets/profit_loss_check.dart';
-
-// Convert Datum to NiftyStock
-NiftyStock toStock(Datum datum) {
-  return NiftyStock(
-    symbol: datum.symbol ?? '',
-    lastPrice: datum.lastPrice ?? 0,
-    change: datum.change ?? 0,
-    pChange: datum.pChange ?? 0,
-  );
-}
 
 class StockItemTile extends StatelessWidget {
+  static const _spacing = 16.0;
+  static const _smallSpacing = 2.0;
+  static const _borderRadius = 16.0;
+
   final Datum datum;
 
   const StockItemTile({
@@ -27,92 +21,107 @@ class StockItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final NiftyStock stock = toStock(datum);
-    final isPositive = stock.change >= 0;
+    final colorScheme = context.colorScheme;
+    final isPositive = (datum.change ?? 0) >= 0;
+    final changeColor = (datum.change ?? 0).getPLColor;
+    final changeIcon = isPositive ? Icons.arrow_upward : Icons.arrow_downward;
+    final formattedLastPrice = '\u20B9${datum.lastPrice?.toStringAsFixed(2) ?? '0.00'}';
+    final formattedChange =
+        '${isPositive ? '+' : ''}${datum.change?.toStringAsFixed(2)} (${datum.pChange?.abs().toStringAsFixed(2)}%)';
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       elevation: 0,
+      margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: colorScheme.outlineVariant,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(_borderRadius),
       ),
       child: InkWell(
         onTap: () => context.push(Routes.stockDetailPage, extra: datum),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(_borderRadius),
         child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Symbol and Price
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Symbol
-                    Text(
-                      stock.symbol,
-                      style: AppTypography.titleMedium.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: colorScheme.onSurface,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    // Last Price
-                    Text(
-                      "\u20B9${stock.lastPrice.toStringAsFixed(2)}",
-                      style: AppTypography.bodyMedium.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Price Change and Percentage
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  // Price Change
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        isPositive ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded,
-                        size: 16,
-                        color: isPositive ? colorScheme.tertiary : colorScheme.error,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        stock.change.toStringAsFixed(2),
-                        style: AppTypography.bodyMedium.copyWith(
-                          color: isPositive ? colorScheme.tertiary : colorScheme.error,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 2),
-                  // Percentage Change
-                  ProfitLossCheck(
-                    value: stock.pChange,
-                    highLightedText: "${stock.pChange.toStringAsFixed(2)}%",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ],
-              ),
-            ],
+          padding: const EdgeInsets.all(_spacing),
+          child: _buildContent(
+            colorScheme: colorScheme,
+            changeColor: changeColor,
+            changeIcon: changeIcon,
+            formattedLastPrice: formattedLastPrice,
+            formattedChange: formattedChange,
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildContent({
+    required ColorScheme colorScheme,
+    required Color changeColor,
+    required IconData changeIcon,
+    required String formattedLastPrice,
+    required String formattedChange,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _buildStockIcon(colorScheme),
+        const SizedBox(width: _spacing),
+        _buildStockSymbol(colorScheme),
+        const Spacer(),
+        _buildStockChange(
+          colorScheme: colorScheme,
+          changeColor: changeColor,
+          changeIcon: changeIcon,
+          formattedChange: formattedChange,
+          formattedLastPrice: formattedLastPrice,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStockIcon(ColorScheme colorScheme) {
+    final symbol = datum.symbol?.isNotEmpty == true ? datum.symbol![0].toUpperCase() : '\u20B9';
+    return Container(
+      height: 42,
+      width: 42,
+      decoration: BoxDecoration(
+        color: colorScheme.primary.withOpacity(0.1),
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          symbol,
+          style: AppTypography.twentyFour.semiBold.withColor(colorScheme.primary),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStockSymbol(ColorScheme colorScheme) {
+    return Text(
+      datum.symbol ?? '',
+      style: AppTypography.sixteen.semiBold.withColor(colorScheme.onSurface),
+    );
+  }
+
+  Widget _buildStockChange({
+    required ColorScheme colorScheme,
+    required Color changeColor,
+    required IconData changeIcon,
+    required String formattedChange,
+    required String formattedLastPrice,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          formattedLastPrice,
+          style: AppTypography.fourteen.withColor(colorScheme.onSurface),
+        ),
+        const SizedBox(height: _smallSpacing),
+        Text(
+          formattedChange,
+          style: AppTypography.twelve.medium.withColor(changeColor),
+        )
+      ],
     );
   }
 }
