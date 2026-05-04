@@ -33,19 +33,19 @@ dependencies:
 
 
   # The following adds the Cupertino Icons font to your application.
-  connectivity_plus: 7.0.0
-  dio: 5.9.1
-  flutter_svg: 2.2.3
+  connectivity_plus: 7.1.1
+  dio: 5.9.2
+  flutter_svg: 2.2.4
   freezed: 3.2.5
   freezed_annotation: 3.1.0
-  get_it: 9.2.0
-  go_router: 17.1.0
-  image_picker: 1.2.1
+  get_it: 9.2.1
+  go_router: 17.2.3
+  image_picker: 1.2.2
   intl: 0.20.2
-  json_annotation: 4.10.0
-  logger: 2.6.2
+  json_annotation: 4.11.0
+  logger: 2.7.0
   provider: 6.1.5+1
-  shared_preferences: 2.5.4
+  shared_preferences: 2.5.5
   shimmer_animation: 2.2.2+1
 
 dev_dependencies:
@@ -60,7 +60,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: 6.0.0
   build_runner: 2.11.0
-  json_serializable: 6.12.0
+  json_serializable: 6.13.2
 
 # Flutter Launcher Icons configuration
 flutter_icons:
