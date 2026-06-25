@@ -6,20 +6,19 @@ import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 import '../../../../core/theme/app_typography.dart';
 
 class ProfileHeader extends StatelessWidget {
+
+  const ProfileHeader({
+    required this.onPickImage, super.key,
+    this.name,
+    this.email,
+    this.imageFile,
+    this.imagePath,
+  });
   final String? name;
   final String? email;
   final File? imageFile;
   final String? imagePath;
   final VoidCallback onPickImage;
-
-  const ProfileHeader({
-    super.key,
-    this.name,
-    this.email,
-    this.imageFile,
-    this.imagePath,
-    required this.onPickImage,
-  });
 
   @override
   Widget build(BuildContext context) {

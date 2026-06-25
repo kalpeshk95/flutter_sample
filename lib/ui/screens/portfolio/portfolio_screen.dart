@@ -57,7 +57,7 @@ class PortfolioScreen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              colorScheme.primary.withOpacity(0.05),
+              colorScheme.primary.withValues(alpha: 0.05),
               colorScheme.surface,
             ],
           ),
@@ -134,9 +134,9 @@ class PortfolioScreen extends StatelessWidget {
 }
 
 class HoldingTile extends StatelessWidget {
-  final HoldingData holding;
 
-  const HoldingTile({super.key, required this.holding});
+  const HoldingTile({required this.holding, super.key});
+  final HoldingData holding;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +154,7 @@ class HoldingTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: colorScheme.outlineVariant.withOpacity(0.3),
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
             width: 1,
           ),
         ),
@@ -168,7 +168,7 @@ class HoldingTile extends StatelessWidget {
                   height: 36,
                   width: 36,
                   decoration: BoxDecoration(
-                    color: colorScheme.primary.withOpacity(0.1),
+                    color: colorScheme.primary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Center(
@@ -185,7 +185,7 @@ class HoldingTile extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "LTP : ",
+                  'LTP : ',
                   style: AppTypography.twelve.medium.withColor(colorScheme.onSurfaceVariant),
                 ),
                 Text(
@@ -199,7 +199,7 @@ class HoldingTile extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "QTY : ",
+                  'QTY : ',
                   style: AppTypography.twelve.medium.withColor(colorScheme.onSurfaceVariant),
                 ),
                 const SizedBox(height: 2),
@@ -209,7 +209,7 @@ class HoldingTile extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "P&L : ",
+                  'P&L : ',
                   style: AppTypography.twelve.medium.withColor(colorScheme.onSurfaceVariant),
                 ),
                 const SizedBox(height: 2),

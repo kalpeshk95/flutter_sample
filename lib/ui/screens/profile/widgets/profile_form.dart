@@ -6,22 +6,16 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../shared/widgets/custom_text_field.dart';
 
 class ProfileForm extends StatelessWidget {
+
+  const ProfileForm({
+    required this.formKey, required this.nameController, required this.emailController, required this.phoneController, required this.dobController, required this.onSelectDate, super.key,
+  });
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController phoneController;
   final TextEditingController dobController;
   final Future<void> Function() onSelectDate;
-
-  const ProfileForm({
-    super.key,
-    required this.formKey,
-    required this.nameController,
-    required this.emailController,
-    required this.phoneController,
-    required this.dobController,
-    required this.onSelectDate,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +45,7 @@ class ProfileForm extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.05),
+          color: Colors.black.withValues(alpha: 0.05),
           blurRadius: 20,
           offset: const Offset(0, 10),
         ),

@@ -61,7 +61,7 @@ Future<void> setupLocator() async {
   _registerApiClients();
 
   // Register repositories
-  _registerRepositories();
+  await _registerRepositories();
 
   // Register view models
   _registerViewModels();

@@ -7,6 +7,15 @@ import '../utility/ui_state.dart';
 // A reusable widget that handles different UI states (loading, error, success, empty)
 
 class UiStateBuilder<T> extends StatelessWidget {
+
+  const UiStateBuilder({
+    required this.uiState, required this.onSuccess, super.key,
+    this.onRetry,
+    this.loadingWidget,
+    this.errorBuilder,
+    this.emptyMessage = 'No data available',
+    this.showRetryOnEmpty = false,
+  });
   final UiState<T> uiState;
   final Widget Function(T data) onSuccess;
   final VoidCallback? onRetry;
@@ -14,17 +23,6 @@ class UiStateBuilder<T> extends StatelessWidget {
   final Widget Function(String error)? errorBuilder;
   final String emptyMessage;
   final bool showRetryOnEmpty;
-
-  const UiStateBuilder({
-    super.key,
-    required this.uiState,
-    required this.onSuccess,
-    this.onRetry,
-    this.loadingWidget,
-    this.errorBuilder,
-    this.emptyMessage = "No data available",
-    this.showRetryOnEmpty = false,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +72,13 @@ Widget _buildDefaultLoader() {
 }
 
 class _DefaultErrorView extends StatelessWidget {
-  final String message;
-  final VoidCallback? onRetry;
 
   const _DefaultErrorView({
-    super.key,
-    required this.message,
+    required this.message, super.key,
     this.onRetry,
   });
+  final String message;
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {

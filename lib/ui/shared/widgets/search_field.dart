@@ -3,22 +3,19 @@ import 'package:flutter_sample/core/theme/app_typography.dart';
 import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 
 class SearchField extends StatefulWidget {
+
+  const SearchField({
+    required this.hintText, required this.searchQuery, required this.onChanged, super.key,
+    this.onFilterTap,
+    this.showFilterButton = false,
+    this.focusNode,
+  });
   final String hintText;
   final String searchQuery;
   final ValueChanged<String> onChanged;
   final VoidCallback? onFilterTap;
   final bool showFilterButton;
   final FocusNode? focusNode;
-
-  const SearchField({
-    super.key,
-    required this.hintText,
-    required this.searchQuery,
-    required this.onChanged,
-    this.onFilterTap,
-    this.showFilterButton = false,
-    this.focusNode,
-  });
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -85,7 +82,7 @@ class _SearchFieldState extends State<SearchField> {
         color: Colors.transparent,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -119,7 +116,7 @@ class _SearchFieldState extends State<SearchField> {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                fillColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                 contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                 suffixIcon: widget.searchQuery.isNotEmpty
                     ? IconButton(
@@ -153,7 +150,7 @@ class _SearchFieldState extends State<SearchField> {
                   widget.onFilterTap!();
                 },
                 style: IconButton.styleFrom(
-                  backgroundColor: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                  backgroundColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

@@ -24,7 +24,7 @@ class AppTheme {
         elevation: 1,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: colorScheme.outline.withOpacity(0.1)),
+          side: BorderSide(color: colorScheme.outline.withValues(alpha: 0.1)),
         ),
         margin: EdgeInsets.zero,
       ),
@@ -43,7 +43,7 @@ class AppTheme {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: colorScheme.outline.withOpacity(0.5)),
+          borderSide: BorderSide(color: colorScheme.outline.withValues(alpha: 0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -54,7 +54,7 @@ class AppTheme {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
       dividerTheme: DividerThemeData(
-        color: colorScheme.outline.withOpacity(0.2),
+        color: colorScheme.outline.withValues(alpha: 0.2),
         thickness: 1,
         space: 1,
       ),

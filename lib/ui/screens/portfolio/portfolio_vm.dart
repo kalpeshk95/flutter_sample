@@ -8,6 +8,8 @@ import 'holding_data.dart';
 import 'widget/sort_bottom_sheet.dart';
 
 class PortfolioVm extends ChangeNotifier {
+
+  PortfolioVm(this._repo);
   final PortfolioRepo _repo;
 
   UiState<List<HoldingData>> holdingsState = UiState.loading();
@@ -20,8 +22,6 @@ class PortfolioVm extends ChangeNotifier {
   bool get isExpanded => _isExpanded;
 
   List<HoldingData> get allHoldings => holdingsState.data ?? [];
-
-  PortfolioVm(this._repo);
 
   Future<void> fetchHoldings() async {
     await ApiExecutor.run<HoldingResponse, List<HoldingData>>(

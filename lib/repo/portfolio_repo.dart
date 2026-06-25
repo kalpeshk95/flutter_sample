@@ -10,9 +10,9 @@ abstract interface class PortfolioRepo {
 }
 
 class PortfolioRepoImpl implements PortfolioRepo {
-  final Future<ApiService> _apiService;
 
   PortfolioRepoImpl(this._apiService);
+  final Future<ApiService> _apiService;
 
   @override
   Future<NetworkResponse<HoldingResponse>> getHoldings() async {

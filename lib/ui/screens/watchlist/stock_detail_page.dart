@@ -9,9 +9,9 @@ import '../../../core/theme/app_typography.dart';
 import '../../shared/widgets/custom_app_bar.dart';
 
 class StockDetailPage extends StatefulWidget {
-  final Datum stock;
 
-  const StockDetailPage({super.key, required this.stock});
+  const StockDetailPage({required this.stock, super.key});
+  final Datum stock;
 
   @override
   State<StockDetailPage> createState() => _StockDetailPageState();
@@ -68,7 +68,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              colorScheme.primary.withOpacity(0.05),
+              colorScheme.primary.withValues(alpha: 0.05),
               colorScheme.surface,
             ],
           ),
@@ -158,7 +158,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: colorScheme.outlineVariant.withOpacity(0.3),
+          color: colorScheme.outlineVariant.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -227,7 +227,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
         Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: colorScheme.primary.withOpacity(0.1),
+            color: colorScheme.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
@@ -265,7 +265,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: colorScheme.outlineVariant.withOpacity(0.3),
+          color: colorScheme.outlineVariant.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -298,7 +298,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
                 height: height,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                  color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: _buildChartContent(colorScheme, stock),
@@ -321,7 +321,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
     return Container(
       height: 36,
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -369,7 +369,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
             Icon(
               Icons.bar_chart_rounded,
               size: 48,
-              color: colorScheme.primary.withOpacity(0.5),
+              color: colorScheme.primary.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 8),
             Text(
@@ -404,7 +404,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: colorScheme.outlineVariant.withOpacity(0.3),
+          color: colorScheme.outlineVariant.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -532,7 +532,7 @@ class _StockDetailPageState extends State<StockDetailPage> {
         color: colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),

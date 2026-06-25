@@ -4,6 +4,22 @@ import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 import '../../../core/theme/app_typography.dart';
 
 class CustomTextField extends StatelessWidget {
+
+  const CustomTextField({
+    required this.controller, required this.label, required this.icon, super.key,
+    this.readOnly = false,
+    this.keyboardType,
+    this.validator,
+    this.onTap,
+    this.hintText,
+    this.maxLines = 1,
+    this.maxLength,
+    this.obscureText = false,
+    this.textInputAction,
+    this.onChanged,
+    this.textCapitalization = TextCapitalization.none,
+    this.contentPadding,
+  });
   final TextEditingController controller;
   final String label;
   final IconData icon;
@@ -19,25 +35,6 @@ class CustomTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextCapitalization textCapitalization;
   final EdgeInsetsGeometry? contentPadding;
-
-  const CustomTextField({
-    super.key,
-    required this.controller,
-    required this.label,
-    required this.icon,
-    this.readOnly = false,
-    this.keyboardType,
-    this.validator,
-    this.onTap,
-    this.hintText,
-    this.maxLines = 1,
-    this.maxLength,
-    this.obscureText = false,
-    this.textInputAction,
-    this.onChanged,
-    this.textCapitalization = TextCapitalization.none,
-    this.contentPadding,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +56,13 @@ class CustomTextField extends StatelessWidget {
         labelText: label,
         hintText: hintText,
         labelStyle: TextStyle(color: colorScheme.onSurfaceVariant),
-        hintStyle: TextStyle(color: colorScheme.onSurfaceVariant.withOpacity(0.6)),
+        hintStyle: TextStyle(color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6)),
         prefixIcon: Icon(icon, color: colorScheme.primary),
         filled: true,
-        fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        fillColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
         contentPadding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: _buildBorder(colorScheme.outline),
-        enabledBorder: _buildBorder(colorScheme.outline.withOpacity(0.5)),
+        enabledBorder: _buildBorder(colorScheme.outline.withValues(alpha: 0.5)),
         focusedBorder: _buildBorder(colorScheme.primary, width: 2),
         errorBorder: _buildBorder(colorScheme.error),
         focusedErrorBorder: _buildBorder(colorScheme.error, width: 2),

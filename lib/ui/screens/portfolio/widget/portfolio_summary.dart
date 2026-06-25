@@ -7,6 +7,10 @@ import 'package:provider/provider.dart';
 import '../portfolio_vm.dart';
 
 class PortfolioSummary extends StatelessWidget {
+
+  const PortfolioSummary({
+    required this.currValue, required this.currInvest, required this.todayPnL, required this.totalPnL, super.key,
+  });
   static const double _cardRadius = 16.0;
   static const double _cardPadding = 16.0;
   static const double _iconSize = 20.0;
@@ -16,14 +20,6 @@ class PortfolioSummary extends StatelessWidget {
   final double currInvest;
   final double todayPnL;
   final double totalPnL;
-
-  const PortfolioSummary({
-    super.key,
-    required this.currValue,
-    required this.currInvest,
-    required this.todayPnL,
-    required this.totalPnL,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +42,8 @@ class PortfolioSummary extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            colorScheme.primary.withOpacity(0.1),
-            colorScheme.primary.withOpacity(0.05),
+            colorScheme.primary.withValues(alpha: 0.1),
+            colorScheme.primary.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -175,7 +171,7 @@ class PortfolioSummary extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         shape: BoxShape.circle,
       ),
       child: Icon(icon, size: 18, color: color),

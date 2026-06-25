@@ -4,16 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 
 class ProfileImagePicker extends StatelessWidget {
+
+  const ProfileImagePicker({
+    required this.imageFile, required this.imagePath, required this.onPickImage, super.key,
+  });
   final File? imageFile;
   final String? imagePath;
   final VoidCallback onPickImage;
-
-  const ProfileImagePicker({
-    super.key,
-    required this.imageFile,
-    required this.imagePath,
-    required this.onPickImage,
-  });
 
   @override
   Widget build(BuildContext context) {

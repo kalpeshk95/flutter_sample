@@ -2,14 +2,12 @@
 import 'package:flutter/material.dart';
 
 class EmptyIllustration extends StatelessWidget {
-  final IconData icon;
-  final ColorScheme colorScheme;
 
   const EmptyIllustration({
-    super.key,
-    required this.icon,
-    required this.colorScheme,
+    required this.icon, required this.colorScheme, super.key,
   });
+  final IconData icon;
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +27,8 @@ class EmptyIllustration extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            colorScheme.primary.withOpacity(0.1),
-            colorScheme.secondary.withOpacity(0.1),
+            colorScheme.primary.withValues(alpha: 0.1),
+            colorScheme.secondary.withValues(alpha: 0.1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -38,7 +36,7 @@ class EmptyIllustration extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(0.1),
+            color: colorScheme.primary.withValues(alpha: 0.1),
             blurRadius: 20,
             spreadRadius: 5,
           ),
