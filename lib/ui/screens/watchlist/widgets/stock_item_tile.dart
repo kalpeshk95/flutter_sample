@@ -82,7 +82,7 @@ class StockItemTile extends StatelessWidget {
       height: 42,
       width: 42,
       decoration: BoxDecoration(
-        color: colorScheme.primary.withOpacity(0.1),
+        color: colorScheme.primary.withValues(alpha: 0.1),
         shape: BoxShape.circle,
       ),
       child: Center(

@@ -86,7 +86,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> with AutomaticKeepAli
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          colorScheme.primary.withOpacity(0.05),
+          colorScheme.primary.withValues(alpha: 0.05),
           colorScheme.surface,
         ],
       ),

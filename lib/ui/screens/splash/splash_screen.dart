@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -85,8 +87,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   void _startAnimations() async {
     await _logoController.forward();
-    _textController.forward();
-    _progressController.forward();
+    unawaited(_textController.forward());
+    unawaited(_progressController.forward());
   }
 
   Future<void> _loadResources() async {
@@ -224,7 +226,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                               Text(
                                 'Smart Financial Decisions',
                                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: colorScheme.onSurface.withOpacity(0.7),
+                                      color: colorScheme.onSurface.withValues(alpha: 0.7),
                                       letterSpacing: 0.3,
                                     ),
                               ),

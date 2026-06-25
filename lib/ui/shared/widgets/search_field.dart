@@ -82,7 +82,7 @@ class _SearchFieldState extends State<SearchField> {
         color: Colors.transparent,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -116,7 +116,7 @@ class _SearchFieldState extends State<SearchField> {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                fillColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                 contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                 suffixIcon: widget.searchQuery.isNotEmpty
                     ? IconButton(
@@ -150,7 +150,7 @@ class _SearchFieldState extends State<SearchField> {
                   widget.onFilterTap!();
                 },
                 style: IconButton.styleFrom(
-                  backgroundColor: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                  backgroundColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

@@ -55,7 +55,7 @@ class _BottomNavBar extends StatelessWidget {
         color: colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: context.colorScheme.onSurfaceVariant.withOpacity(0.1),
+            color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, -2),
           ),
@@ -70,7 +70,7 @@ class _BottomNavBar extends StatelessWidget {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         destinations: destinations.map((destination) {
           final isSelected = destinations.indexOf(destination) == currentIndex;
-          final color = isSelected ? colorScheme.onPrimary : colorScheme.onSurface.withOpacity(0.6);
+          final color = isSelected ? colorScheme.onPrimary : colorScheme.onSurface.withValues(alpha: 0.6);
 
           return NavigationDestination(
             icon: Icon(destination.icon, color: color),

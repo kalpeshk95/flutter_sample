@@ -13,8 +13,8 @@ class NetworkUtils {
     // Check if there's any network connectivity
     final connectivityResult = await Connectivity().checkConnectivity();
 
-    // If there's no connectivity at all, return false immediately
-    if (connectivityResult == ConnectivityResult.none) {
+        // If there's no connectivity at all, return false immediately
+    if (connectivityResult.contains(ConnectivityResult.none)) {
       return false;
     }
 

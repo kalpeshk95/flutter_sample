@@ -98,7 +98,7 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
                 widget.onClear();
               },
             ),
-            Divider(height: 1, color: colorScheme.outlineVariant.withOpacity(0.5)),
+            Divider(height: 1, color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
             _SortOptions(
               currentSort: _currentSort,
               currentDirection: _currentDirection,
@@ -123,7 +123,7 @@ class _DragHandle extends StatelessWidget {
           width: 36.0,
           height: 4.0,
           decoration: BoxDecoration(
-            color: context.colorScheme.onSurfaceVariant.withOpacity(0.3),
+            color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -230,7 +230,7 @@ class _SortChip extends StatelessWidget {
           border: Border.all(
             color: shouldShowAsSelected
                 ? colorScheme.secondaryContainer
-                : colorScheme.outlineVariant.withOpacity(0.3),
+                : colorScheme.outlineVariant.withValues(alpha: 0.3),
             width: 1.5,
           ),
         ),
