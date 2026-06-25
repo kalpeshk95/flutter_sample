@@ -3,22 +3,19 @@ import 'package:flutter_sample/core/theme/app_typography.dart';
 import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 
 class SearchField extends StatefulWidget {
+
+  const SearchField({
+    required this.hintText, required this.searchQuery, required this.onChanged, super.key,
+    this.onFilterTap,
+    this.showFilterButton = false,
+    this.focusNode,
+  });
   final String hintText;
   final String searchQuery;
   final ValueChanged<String> onChanged;
   final VoidCallback? onFilterTap;
   final bool showFilterButton;
   final FocusNode? focusNode;
-
-  const SearchField({
-    super.key,
-    required this.hintText,
-    required this.searchQuery,
-    required this.onChanged,
-    this.onFilterTap,
-    this.showFilterButton = false,
-    this.focusNode,
-  });
 
   @override
   State<SearchField> createState() => _SearchFieldState();

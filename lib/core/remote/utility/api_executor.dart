@@ -12,7 +12,7 @@ class ApiExecutor {
 
     final hasInternet = await NetworkUtils.hasInternet();
     if (!hasInternet) {
-      onStateChanged(UiState.error("No internet connection"));
+      onStateChanged(UiState.error('No internet connection'));
       return;
     }
 

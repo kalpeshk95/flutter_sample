@@ -4,6 +4,22 @@ import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 import '../../../core/theme/app_typography.dart';
 
 class CustomTextField extends StatelessWidget {
+
+  const CustomTextField({
+    required this.controller, required this.label, required this.icon, super.key,
+    this.readOnly = false,
+    this.keyboardType,
+    this.validator,
+    this.onTap,
+    this.hintText,
+    this.maxLines = 1,
+    this.maxLength,
+    this.obscureText = false,
+    this.textInputAction,
+    this.onChanged,
+    this.textCapitalization = TextCapitalization.none,
+    this.contentPadding,
+  });
   final TextEditingController controller;
   final String label;
   final IconData icon;
@@ -19,25 +35,6 @@ class CustomTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextCapitalization textCapitalization;
   final EdgeInsetsGeometry? contentPadding;
-
-  const CustomTextField({
-    super.key,
-    required this.controller,
-    required this.label,
-    required this.icon,
-    this.readOnly = false,
-    this.keyboardType,
-    this.validator,
-    this.onTap,
-    this.hintText,
-    this.maxLines = 1,
-    this.maxLength,
-    this.obscureText = false,
-    this.textInputAction,
-    this.onChanged,
-    this.textCapitalization = TextCapitalization.none,
-    this.contentPadding,
-  });
 
   @override
   Widget build(BuildContext context) {

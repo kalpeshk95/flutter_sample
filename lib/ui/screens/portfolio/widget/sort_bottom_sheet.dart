@@ -23,18 +23,14 @@ extension SortByExtension on SortBy {
 }
 
 class SortBottomSheet extends StatefulWidget {
+
+  const SortBottomSheet({
+    required this.selectedSort, required this.direction, required this.onSelected, required this.onClear, super.key,
+  });
   final SortBy? selectedSort;
   final SortDirection direction;
   final Function(SortBy sortBy, SortDirection direction) onSelected;
   final VoidCallback onClear;
-
-  const SortBottomSheet({
-    super.key,
-    required this.selectedSort,
-    required this.direction,
-    required this.onSelected,
-    required this.onClear,
-  });
 
   @override
   State<SortBottomSheet> createState() => _SortBottomSheetState();
@@ -137,9 +133,9 @@ class _DragHandle extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  final VoidCallback onClear;
 
   const _Header({required this.onClear});
+  final VoidCallback onClear;
 
   @override
   Widget build(BuildContext context) {
@@ -175,15 +171,15 @@ class _Header extends StatelessWidget {
 }
 
 class _SortOptions extends StatelessWidget {
-  final SortBy? currentSort;
-  final SortDirection currentDirection;
-  final Function(SortBy) onSortChanged;
 
   const _SortOptions({
     required this.currentSort,
     required this.currentDirection,
     required this.onSortChanged,
   });
+  final SortBy? currentSort;
+  final SortDirection currentDirection;
+  final Function(SortBy) onSortChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -207,17 +203,16 @@ class _SortOptions extends StatelessWidget {
 }
 
 class _SortChip extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final SortDirection? sortDirection;
-  final VoidCallback onSelected;
 
   const _SortChip({
     required this.label,
     required this.isSelected,
-    this.sortDirection,
-    required this.onSelected,
+    required this.onSelected, this.sortDirection,
   });
+  final String label;
+  final bool isSelected;
+  final SortDirection? sortDirection;
+  final VoidCallback onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -230,7 +225,7 @@ class _SortChip extends StatelessWidget {
       child: Container(
         padding: _SortBottomSheetState._chipPadding,
         decoration: BoxDecoration(
-          color: shouldShowAsSelected ? colorScheme.primaryContainer : colorScheme.surfaceVariant,
+          color: shouldShowAsSelected ? colorScheme.primaryContainer : colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
             color: shouldShowAsSelected

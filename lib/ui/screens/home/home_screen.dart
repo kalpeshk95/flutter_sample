@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../routing/destination.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.navigationShell});
+  const HomeScreen({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 

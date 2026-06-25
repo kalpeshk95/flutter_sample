@@ -13,22 +13,6 @@ String niftyFiftyResponseToJson(NiftyFiftyResponse data) => json.encode(data.toJ
 
 @JsonSerializable()
 class NiftyFiftyResponse {
-  @JsonKey(name: "name")
-  String? name;
-  @JsonKey(name: "advance")
-  Advance? advance;
-  @JsonKey(name: "timestamp")
-  String? timestamp;
-  @JsonKey(name: "data")
-  List<Datum>? data;
-  @JsonKey(name: "metadata")
-  Metadata? metadata;
-  @JsonKey(name: "marketStatus")
-  MarketStatus? marketStatus;
-  @JsonKey(name: "date30dAgo")
-  String? date30DAgo;
-  @JsonKey(name: "date365dAgo")
-  String? date365DAgo;
 
   NiftyFiftyResponse({
     this.name,
@@ -42,18 +26,28 @@ class NiftyFiftyResponse {
   });
 
   factory NiftyFiftyResponse.fromJson(Map<String, dynamic> json) => _$NiftyFiftyResponseFromJson(json);
+  @JsonKey(name: 'name')
+  String? name;
+  @JsonKey(name: 'advance')
+  Advance? advance;
+  @JsonKey(name: 'timestamp')
+  String? timestamp;
+  @JsonKey(name: 'data')
+  List<Datum>? data;
+  @JsonKey(name: 'metadata')
+  Metadata? metadata;
+  @JsonKey(name: 'marketStatus')
+  MarketStatus? marketStatus;
+  @JsonKey(name: 'date30dAgo')
+  String? date30DAgo;
+  @JsonKey(name: 'date365dAgo')
+  String? date365DAgo;
 
   Map<String, dynamic> toJson() => _$NiftyFiftyResponseToJson(this);
 }
 
 @JsonSerializable()
 class Advance {
-  @JsonKey(name: "declines")
-  String? declines;
-  @JsonKey(name: "advances")
-  String? advances;
-  @JsonKey(name: "unchanged")
-  String? unchanged;
 
   Advance({
     this.declines,
@@ -62,66 +56,18 @@ class Advance {
   });
 
   factory Advance.fromJson(Map<String, dynamic> json) => _$AdvanceFromJson(json);
+  @JsonKey(name: 'declines')
+  String? declines;
+  @JsonKey(name: 'advances')
+  String? advances;
+  @JsonKey(name: 'unchanged')
+  String? unchanged;
 
   Map<String, dynamic> toJson() => _$AdvanceToJson(this);
 }
 
 @JsonSerializable()
 class Datum {
-  @JsonKey(name: "priority")
-  int? priority;
-  @JsonKey(name: "symbol")
-  String? symbol;
-  @JsonKey(name: "identifier")
-  String? identifier;
-  @JsonKey(name: "open")
-  double? open;
-  @JsonKey(name: "dayHigh")
-  double? dayHigh;
-  @JsonKey(name: "dayLow")
-  double? dayLow;
-  @JsonKey(name: "lastPrice")
-  double? lastPrice;
-  @JsonKey(name: "previousClose")
-  double? previousClose;
-  @JsonKey(name: "change")
-  double? change;
-  @JsonKey(name: "pChange")
-  double? pChange;
-  @JsonKey(name: "ffmc")
-  double? ffmc;
-  @JsonKey(name: "yearHigh")
-  double? yearHigh;
-  @JsonKey(name: "yearLow")
-  double? yearLow;
-  @JsonKey(name: "totalTradedVolume")
-  int? totalTradedVolume;
-  @JsonKey(name: "stockIndClosePrice")
-  int? stockIndClosePrice;
-  @JsonKey(name: "totalTradedValue")
-  double? totalTradedValue;
-  @JsonKey(name: "lastUpdateTime")
-  String? lastUpdateTime;
-  @JsonKey(name: "nearWKH")
-  double? nearWkh;
-  @JsonKey(name: "nearWKL")
-  double? nearWkl;
-  @JsonKey(name: "date365dAgo")
-  String? date365DAgo;
-  @JsonKey(name: "chart365dPath")
-  String? chart365DPath;
-  @JsonKey(name: "date30dAgo")
-  String? date30DAgo;
-  @JsonKey(name: "perChange30d")
-  double? perChange30D;
-  @JsonKey(name: "chart30dPath")
-  String? chart30DPath;
-  @JsonKey(name: "chartTodayPath")
-  String? chartTodayPath;
-  @JsonKey(name: "series")
-  String? series;
-  @JsonKey(name: "meta")
-  Meta? meta;
 
   Datum({
     this.priority,
@@ -154,48 +100,66 @@ class Datum {
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+  @JsonKey(name: 'priority')
+  int? priority;
+  @JsonKey(name: 'symbol')
+  String? symbol;
+  @JsonKey(name: 'identifier')
+  String? identifier;
+  @JsonKey(name: 'open')
+  double? open;
+  @JsonKey(name: 'dayHigh')
+  double? dayHigh;
+  @JsonKey(name: 'dayLow')
+  double? dayLow;
+  @JsonKey(name: 'lastPrice')
+  double? lastPrice;
+  @JsonKey(name: 'previousClose')
+  double? previousClose;
+  @JsonKey(name: 'change')
+  double? change;
+  @JsonKey(name: 'pChange')
+  double? pChange;
+  @JsonKey(name: 'ffmc')
+  double? ffmc;
+  @JsonKey(name: 'yearHigh')
+  double? yearHigh;
+  @JsonKey(name: 'yearLow')
+  double? yearLow;
+  @JsonKey(name: 'totalTradedVolume')
+  int? totalTradedVolume;
+  @JsonKey(name: 'stockIndClosePrice')
+  int? stockIndClosePrice;
+  @JsonKey(name: 'totalTradedValue')
+  double? totalTradedValue;
+  @JsonKey(name: 'lastUpdateTime')
+  String? lastUpdateTime;
+  @JsonKey(name: 'nearWKH')
+  double? nearWkh;
+  @JsonKey(name: 'nearWKL')
+  double? nearWkl;
+  @JsonKey(name: 'date365dAgo')
+  String? date365DAgo;
+  @JsonKey(name: 'chart365dPath')
+  String? chart365DPath;
+  @JsonKey(name: 'date30dAgo')
+  String? date30DAgo;
+  @JsonKey(name: 'perChange30d')
+  double? perChange30D;
+  @JsonKey(name: 'chart30dPath')
+  String? chart30DPath;
+  @JsonKey(name: 'chartTodayPath')
+  String? chartTodayPath;
+  @JsonKey(name: 'series')
+  String? series;
+  @JsonKey(name: 'meta')
+  Meta? meta;
 
   Map<String, dynamic> toJson() => _$DatumToJson(this);
 }
 
 @JsonSerializable()
 class Meta {
-  @JsonKey(name: "symbol")
-  String? symbol;
-  @JsonKey(name: "companyName")
-  String? companyName;
-  @JsonKey(name: "industry")
-  String? industry;
-  @JsonKey(name: "activeSeries")
-  List<String>? activeSeries;
-  @JsonKey(name: "isFNOSec")
-  bool? isFnoSec;
-  @JsonKey(name: "isCASec")
-  bool? isCaSec;
-  @JsonKey(name: "isSLBSec")
-  bool? isSlbSec;
-  @JsonKey(name: "isDebtSec")
-  bool? isDebtSec;
-  @JsonKey(name: "isSuspended")
-  bool? isSuspended;
-  @JsonKey(name: "tempSuspendedSeries")
-  List<String>? tempSuspendedSeries;
-  @JsonKey(name: "isETFSec")
-  bool? isEtfSec;
-  @JsonKey(name: "isDelisted")
-  bool? isDelisted;
-  @JsonKey(name: "isin")
-  String? isin;
-  @JsonKey(name: "slb_isin")
-  String? slbIsin;
-  @JsonKey(name: "listingDate")
-  DateTime? listingDate;
-  @JsonKey(name: "isMunicipalBond")
-  bool? isMunicipalBond;
-  @JsonKey(name: "isHybridSymbol")
-  bool? isHybridSymbol;
-  @JsonKey(name: "quotepreopenstatus")
-  Quotepreopenstatus? quotepreopenstatus;
 
   Meta({
     this.symbol,
@@ -219,18 +183,48 @@ class Meta {
   });
 
   factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
+  @JsonKey(name: 'symbol')
+  String? symbol;
+  @JsonKey(name: 'companyName')
+  String? companyName;
+  @JsonKey(name: 'industry')
+  String? industry;
+  @JsonKey(name: 'activeSeries')
+  List<String>? activeSeries;
+  @JsonKey(name: 'isFNOSec')
+  bool? isFnoSec;
+  @JsonKey(name: 'isCASec')
+  bool? isCaSec;
+  @JsonKey(name: 'isSLBSec')
+  bool? isSlbSec;
+  @JsonKey(name: 'isDebtSec')
+  bool? isDebtSec;
+  @JsonKey(name: 'isSuspended')
+  bool? isSuspended;
+  @JsonKey(name: 'tempSuspendedSeries')
+  List<String>? tempSuspendedSeries;
+  @JsonKey(name: 'isETFSec')
+  bool? isEtfSec;
+  @JsonKey(name: 'isDelisted')
+  bool? isDelisted;
+  @JsonKey(name: 'isin')
+  String? isin;
+  @JsonKey(name: 'slb_isin')
+  String? slbIsin;
+  @JsonKey(name: 'listingDate')
+  DateTime? listingDate;
+  @JsonKey(name: 'isMunicipalBond')
+  bool? isMunicipalBond;
+  @JsonKey(name: 'isHybridSymbol')
+  bool? isHybridSymbol;
+  @JsonKey(name: 'quotepreopenstatus')
+  Quotepreopenstatus? quotepreopenstatus;
 
   Map<String, dynamic> toJson() => _$MetaToJson(this);
 }
 
 @JsonSerializable()
 class Quotepreopenstatus {
-  @JsonKey(name: "equityTime")
-  String? equityTime;
-  @JsonKey(name: "preOpenTime")
-  String? preOpenTime;
-  @JsonKey(name: "QuotePreOpenFlag")
-  bool? quotePreOpenFlag;
 
   Quotepreopenstatus({
     this.equityTime,
@@ -239,28 +233,18 @@ class Quotepreopenstatus {
   });
 
   factory Quotepreopenstatus.fromJson(Map<String, dynamic> json) => _$QuotepreopenstatusFromJson(json);
+  @JsonKey(name: 'equityTime')
+  String? equityTime;
+  @JsonKey(name: 'preOpenTime')
+  String? preOpenTime;
+  @JsonKey(name: 'QuotePreOpenFlag')
+  bool? quotePreOpenFlag;
 
   Map<String, dynamic> toJson() => _$QuotepreopenstatusToJson(this);
 }
 
 @JsonSerializable()
 class MarketStatus {
-  @JsonKey(name: "market")
-  String? market;
-  @JsonKey(name: "marketStatus")
-  String? marketStatus;
-  @JsonKey(name: "tradeDate")
-  String? tradeDate;
-  @JsonKey(name: "index")
-  String? index;
-  @JsonKey(name: "last")
-  int? last;
-  @JsonKey(name: "variation")
-  double? variation;
-  @JsonKey(name: "percentChange")
-  double? percentChange;
-  @JsonKey(name: "marketStatusMessage")
-  String? marketStatusMessage;
 
   MarketStatus({
     this.market,
@@ -274,42 +258,28 @@ class MarketStatus {
   });
 
   factory MarketStatus.fromJson(Map<String, dynamic> json) => _$MarketStatusFromJson(json);
+  @JsonKey(name: 'market')
+  String? market;
+  @JsonKey(name: 'marketStatus')
+  String? marketStatus;
+  @JsonKey(name: 'tradeDate')
+  String? tradeDate;
+  @JsonKey(name: 'index')
+  String? index;
+  @JsonKey(name: 'last')
+  int? last;
+  @JsonKey(name: 'variation')
+  double? variation;
+  @JsonKey(name: 'percentChange')
+  double? percentChange;
+  @JsonKey(name: 'marketStatusMessage')
+  String? marketStatusMessage;
 
   Map<String, dynamic> toJson() => _$MarketStatusToJson(this);
 }
 
 @JsonSerializable()
 class Metadata {
-  @JsonKey(name: "indexName")
-  String? indexName;
-  @JsonKey(name: "open")
-  double? open;
-  @JsonKey(name: "high")
-  double? high;
-  @JsonKey(name: "low")
-  double? low;
-  @JsonKey(name: "previousClose")
-  double? previousClose;
-  @JsonKey(name: "last")
-  int? last;
-  @JsonKey(name: "percChange")
-  double? percChange;
-  @JsonKey(name: "change")
-  double? change;
-  @JsonKey(name: "timeVal")
-  String? timeVal;
-  @JsonKey(name: "yearHigh")
-  double? yearHigh;
-  @JsonKey(name: "yearLow")
-  double? yearLow;
-  @JsonKey(name: "indicativeClose")
-  int? indicativeClose;
-  @JsonKey(name: "totalTradedVolume")
-  int? totalTradedVolume;
-  @JsonKey(name: "totalTradedValue")
-  double? totalTradedValue;
-  @JsonKey(name: "ffmc_sum")
-  double? ffmcSum;
 
   Metadata({
     this.indexName,
@@ -330,6 +300,36 @@ class Metadata {
   });
 
   factory Metadata.fromJson(Map<String, dynamic> json) => _$MetadataFromJson(json);
+  @JsonKey(name: 'indexName')
+  String? indexName;
+  @JsonKey(name: 'open')
+  double? open;
+  @JsonKey(name: 'high')
+  double? high;
+  @JsonKey(name: 'low')
+  double? low;
+  @JsonKey(name: 'previousClose')
+  double? previousClose;
+  @JsonKey(name: 'last')
+  int? last;
+  @JsonKey(name: 'percChange')
+  double? percChange;
+  @JsonKey(name: 'change')
+  double? change;
+  @JsonKey(name: 'timeVal')
+  String? timeVal;
+  @JsonKey(name: 'yearHigh')
+  double? yearHigh;
+  @JsonKey(name: 'yearLow')
+  double? yearLow;
+  @JsonKey(name: 'indicativeClose')
+  int? indicativeClose;
+  @JsonKey(name: 'totalTradedVolume')
+  int? totalTradedVolume;
+  @JsonKey(name: 'totalTradedValue')
+  double? totalTradedValue;
+  @JsonKey(name: 'ffmc_sum')
+  double? ffmcSum;
 
   Map<String, dynamic> toJson() => _$MetadataToJson(this);
 }

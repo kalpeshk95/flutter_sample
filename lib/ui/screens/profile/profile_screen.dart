@@ -110,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: CustomAppBar(
-            title: "My Profile",
+            title: 'My Profile',
             backgroundColor: Colors.transparent,
             centerTitle: false,
             showBackButton: false,

@@ -10,9 +10,9 @@ abstract interface class WatchlistRepo {
 }
 
 class WatchlistRepoImpl implements WatchlistRepo {
-  final Future<ApiService> _apiService;
 
   WatchlistRepoImpl(this._apiService);
+  final Future<ApiService> _apiService;
 
   @override
   Future<NetworkResponse<NiftyFiftyResponse>> getNiftyFiftyList() async {

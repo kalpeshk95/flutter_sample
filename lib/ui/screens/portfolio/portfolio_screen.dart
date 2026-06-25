@@ -134,9 +134,9 @@ class PortfolioScreen extends StatelessWidget {
 }
 
 class HoldingTile extends StatelessWidget {
-  final HoldingData holding;
 
-  const HoldingTile({super.key, required this.holding});
+  const HoldingTile({required this.holding, super.key});
+  final HoldingData holding;
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +185,7 @@ class HoldingTile extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "LTP : ",
+                  'LTP : ',
                   style: AppTypography.twelve.medium.withColor(colorScheme.onSurfaceVariant),
                 ),
                 Text(
@@ -199,7 +199,7 @@ class HoldingTile extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "QTY : ",
+                  'QTY : ',
                   style: AppTypography.twelve.medium.withColor(colorScheme.onSurfaceVariant),
                 ),
                 const SizedBox(height: 2),
@@ -209,7 +209,7 @@ class HoldingTile extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "P&L : ",
+                  'P&L : ',
                   style: AppTypography.twelve.medium.withColor(colorScheme.onSurfaceVariant),
                 ),
                 const SizedBox(height: 2),

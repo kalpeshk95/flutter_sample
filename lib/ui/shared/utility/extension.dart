@@ -8,8 +8,8 @@ extension ColorExtension on num {
 
 extension CurrencyFormatter on double {
   String formatCurrency() {
-    final formatter = NumberFormat("#,##0.00"); // Format with commas
-    return "\u{20B9}${formatter.format(this)}"; // Format the double value
+    final formatter = NumberFormat('#,##0.00'); // Format with commas
+    return '\u{20B9}${formatter.format(this)}'; // Format the double value
   }
 }
 

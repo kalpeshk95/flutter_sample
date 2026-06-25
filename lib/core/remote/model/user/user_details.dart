@@ -13,26 +13,6 @@ String userDetailsToJson(List<UserDetails> data) => json.encode(List<dynamic>.fr
 
 @JsonSerializable()
 class UserDetails {
-  @JsonKey(name: "title")
-  String title;
-  @JsonKey(name: "first_name")
-  String firstName;
-  @JsonKey(name: "last_name")
-  String lastName;
-  @JsonKey(name: "email")
-  String email;
-  @JsonKey(name: "gender")
-  Gender gender;
-  @JsonKey(name: "height")
-  double height;
-  @JsonKey(name: "weight")
-  double weight;
-  @JsonKey(name: "age")
-  int age;
-  @JsonKey(name: "education")
-  Education education;
-  @JsonKey(name: "job_details")
-  JobDetails jobDetails;
 
   UserDetails({
     required this.title,
@@ -46,6 +26,28 @@ class UserDetails {
     required this.education,
     required this.jobDetails,
   });
+
+  factory UserDetails.fromJson(Map<String, dynamic> json) => _$UserDetailsFromJson(json);
+  @JsonKey(name: 'title')
+  String title;
+  @JsonKey(name: 'first_name')
+  String firstName;
+  @JsonKey(name: 'last_name')
+  String lastName;
+  @JsonKey(name: 'email')
+  String email;
+  @JsonKey(name: 'gender')
+  Gender gender;
+  @JsonKey(name: 'height')
+  double height;
+  @JsonKey(name: 'weight')
+  double weight;
+  @JsonKey(name: 'age')
+  int age;
+  @JsonKey(name: 'education')
+  Education education;
+  @JsonKey(name: 'job_details')
+  JobDetails jobDetails;
 
   UserDetails copyWith({
     String? title,
@@ -72,22 +74,22 @@ class UserDetails {
         jobDetails: jobDetails ?? this.jobDetails,
       );
 
-  factory UserDetails.fromJson(Map<String, dynamic> json) => _$UserDetailsFromJson(json);
-
   Map<String, dynamic> toJson() => _$UserDetailsToJson(this);
 }
 
 @JsonSerializable()
 class Education {
-  @JsonKey(name: "degree")
-  String degree;
-  @JsonKey(name: "university")
-  String university;
 
   Education({
     required this.degree,
     required this.university,
   });
+
+  factory Education.fromJson(Map<String, dynamic> json) => _$EducationFromJson(json);
+  @JsonKey(name: 'degree')
+  String degree;
+  @JsonKey(name: 'university')
+  String university;
 
   Education copyWith({
     String? degree,
@@ -98,40 +100,40 @@ class Education {
         university: university ?? this.university,
       );
 
-  factory Education.fromJson(Map<String, dynamic> json) => _$EducationFromJson(json);
-
   Map<String, dynamic> toJson() => _$EducationToJson(this);
 }
 
 enum Gender {
-  @JsonValue("Agender")
+  @JsonValue('Agender')
   agender,
-  @JsonValue("Female")
+  @JsonValue('Female')
   female,
-  @JsonValue("Male")
+  @JsonValue('Male')
   male
 }
 
 final genderValues = EnumValues({
-  "Agender": Gender.agender,
-  "Female": Gender.female,
-  "Male": Gender.male
+  'Agender': Gender.agender,
+  'Female': Gender.female,
+  'Male': Gender.male
 });
 
 @JsonSerializable()
 class JobDetails {
-  @JsonKey(name: "job_title")
-  String jobTitle;
-  @JsonKey(name: "company")
-  String company;
-  @JsonKey(name: "country")
-  String country;
 
   JobDetails({
     required this.jobTitle,
     required this.company,
     required this.country,
   });
+
+  factory JobDetails.fromJson(Map<String, dynamic> json) => _$JobDetailsFromJson(json);
+  @JsonKey(name: 'job_title')
+  String jobTitle;
+  @JsonKey(name: 'company')
+  String company;
+  @JsonKey(name: 'country')
+  String country;
 
   JobDetails copyWith({
     String? jobTitle,
@@ -144,16 +146,14 @@ class JobDetails {
         country: country ?? this.country,
       );
 
-  factory JobDetails.fromJson(Map<String, dynamic> json) => _$JobDetailsFromJson(json);
-
   Map<String, dynamic> toJson() => _$JobDetailsToJson(this);
 }
 
 class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
 
   EnumValues(this.map);
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
 
   Map<T, String> get reverse {
     reverseMap = map.map((k, v) => MapEntry(v, k));

@@ -1,43 +1,90 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
+# -----------------------------------------------------------------------------
+# OS & System Files
+# -----------------------------------------------------------------------------
 .DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
+.AppleDouble
+.LSOverride
+Icon\r
+Thumbs.db
+desktop.ini
 
-# IntelliJ related
+# -----------------------------------------------------------------------------
+# IDEs and Editors
+# -----------------------------------------------------------------------------
+.idea/
 *.iml
 *.ipr
 *.iws
-.idea/
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+.history/
+*.suo
+*.ntvsca
+*.njsproj
+*.sln
+*.swp
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# -----------------------------------------------------------------------------
+# Flutter & Dart Build Artifacts
+# -----------------------------------------------------------------------------
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
 .pub/
-/build/
+build/
+*.class
+*.log
+*.pyc
+.buildlog/
+.svn/
+migrate_working_dir/
 
-# Symbolication related
+# -----------------------------------------------------------------------------
+# Web Specific
+# -----------------------------------------------------------------------------
+lib/generated_plugin_registrant.dart
+
+# -----------------------------------------------------------------------------
+# Android Specific
+# -----------------------------------------------------------------------------
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/app/google-services.json
+*.keystore
+*.jks
+
+# -----------------------------------------------------------------------------
+# iOS Specific
+# -----------------------------------------------------------------------------
+ios/.generated/
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig
+ios/Flutter/Generated.xcconfig
+ios/Runner/Generated.xcconfig
+ios/Runner/Generated.plist
+ios/Runner.xcworkspace
+ios/Podfile.lock
+Pods/
+.symlinks/
+
+# -----------------------------------------------------------------------------
+# Symbolication & Obfuscation
+# -----------------------------------------------------------------------------
 app.*.symbols
-
-# Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# -----------------------------------------------------------------------------
+# Development & Environment Files
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example

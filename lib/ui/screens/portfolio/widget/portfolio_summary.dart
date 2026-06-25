@@ -7,6 +7,10 @@ import 'package:provider/provider.dart';
 import '../portfolio_vm.dart';
 
 class PortfolioSummary extends StatelessWidget {
+
+  const PortfolioSummary({
+    required this.currValue, required this.currInvest, required this.todayPnL, required this.totalPnL, super.key,
+  });
   static const double _cardRadius = 16.0;
   static const double _cardPadding = 16.0;
   static const double _iconSize = 20.0;
@@ -16,14 +20,6 @@ class PortfolioSummary extends StatelessWidget {
   final double currInvest;
   final double todayPnL;
   final double totalPnL;
-
-  const PortfolioSummary({
-    super.key,
-    required this.currValue,
-    required this.currInvest,
-    required this.todayPnL,
-    required this.totalPnL,
-  });
 
   @override
   Widget build(BuildContext context) {

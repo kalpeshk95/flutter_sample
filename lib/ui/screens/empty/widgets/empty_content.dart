@@ -3,20 +3,17 @@ import 'package:flutter_sample/core/theme/app_typography.dart';
 import 'package:flutter_sample/core/theme/text_style_extensions.dart';
 
 class EmptyContent extends StatelessWidget {
+
+  const EmptyContent({
+    required this.message, required this.subtitle, required this.colorScheme, super.key,
+    this.actionText,
+    this.onActionPressed,
+  });
   final String message;
   final String subtitle;
   final String? actionText;
   final VoidCallback? onActionPressed;
   final ColorScheme colorScheme;
-
-  const EmptyContent({
-    super.key,
-    required this.message,
-    required this.subtitle,
-    this.actionText,
-    this.onActionPressed,
-    required this.colorScheme,
-  });
 
   @override
   Widget build(BuildContext context) {

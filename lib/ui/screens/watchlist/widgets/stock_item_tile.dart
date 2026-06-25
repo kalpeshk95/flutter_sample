@@ -8,16 +8,15 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../routing/routes.dart';
 
 class StockItemTile extends StatelessWidget {
+
+  const StockItemTile({
+    required this.datum, super.key,
+  });
   static const _spacing = 16.0;
   static const _smallSpacing = 2.0;
   static const _borderRadius = 16.0;
 
   final Datum datum;
-
-  const StockItemTile({
-    super.key,
-    required this.datum,
-  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,8 @@ import '../../../repo/watchlist_repo.dart';
 import '../../shared/utility/ui_state.dart';
 
 class WatchlistVm extends ChangeNotifier {
+
+  WatchlistVm(this._repo);
   final WatchlistRepo _repo;
 
   var _niftyFiftyList = UiState<List<Datum>>.loading();
@@ -19,8 +21,6 @@ class WatchlistVm extends ChangeNotifier {
     _searchQuery = query.toLowerCase();
     notifyListeners();
   }
-
-  WatchlistVm(this._repo);
 
   Future<void> fetchNiftyList() async {
     await ApiExecutor.run<NiftyFiftyResponse, List<Datum>>(

@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
-  final String baseUrl;
-  final Dio _dio;
 
   ApiService({required Dio dio, required this.baseUrl}) : _dio = dio..options.baseUrl = baseUrl;
+  final String baseUrl;
+  final Dio _dio;
 
   Future<Response<T>> getRequest<T>(String url,
       {Map<String, dynamic> queryParam = const {},

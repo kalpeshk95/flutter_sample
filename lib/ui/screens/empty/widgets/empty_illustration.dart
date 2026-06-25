@@ -2,14 +2,12 @@
 import 'package:flutter/material.dart';
 
 class EmptyIllustration extends StatelessWidget {
-  final IconData icon;
-  final ColorScheme colorScheme;
 
   const EmptyIllustration({
-    super.key,
-    required this.icon,
-    required this.colorScheme,
+    required this.icon, required this.colorScheme, super.key,
   });
+  final IconData icon;
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {

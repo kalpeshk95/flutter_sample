@@ -1,10 +1,6 @@
 import 'package:flutter_sample/core/remote/model/nifty/nifty_fifty_response.dart';
 
 class NiftyStock {
-  final String symbol;
-  final double lastPrice;
-  final double change;
-  final double pChange;
 
   NiftyStock({
     required this.symbol,
@@ -12,13 +8,17 @@ class NiftyStock {
     required this.change,
     required this.pChange,
   });
+  final String symbol;
+  final double lastPrice;
+  final double change;
+  final double pChange;
 }
 
 // Convert List<UserHoldingItem> to List<HoldingData>
 List<NiftyStock> toWatchlist(List<Datum> list) {
   return list.map((item) {
     return NiftyStock(
-      symbol: item.symbol ?? "",
+      symbol: item.symbol ?? '',
       lastPrice: item.lastPrice ?? 0,
       change: item.change ?? 0.0,
       pChange: item.pChange ?? 0.0,
@@ -28,7 +28,7 @@ List<NiftyStock> toWatchlist(List<Datum> list) {
 
 NiftyStock toStock(Datum item) {
   return NiftyStock(
-    symbol: item.symbol ?? "",
+    symbol: item.symbol ?? '',
     lastPrice: item.lastPrice ?? 0,
     change: item.change ?? 0.0,
     pChange: item.pChange ?? 0.0,

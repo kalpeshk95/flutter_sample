@@ -9,9 +9,9 @@ import '../../../core/theme/app_typography.dart';
 import '../../shared/widgets/custom_app_bar.dart';
 
 class StockDetailPage extends StatefulWidget {
-  final Datum stock;
 
-  const StockDetailPage({super.key, required this.stock});
+  const StockDetailPage({required this.stock, super.key});
+  final Datum stock;
 
   @override
   State<StockDetailPage> createState() => _StockDetailPageState();
